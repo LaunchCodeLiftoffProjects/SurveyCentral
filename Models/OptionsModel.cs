@@ -13,5 +13,7 @@ namespace TestCentral.Models
         public string Label { get; set; }
 
 
+        public OptionsModel() { }
+
     }
 }
