@@ -6,14 +6,15 @@ using TestCentral.Viewmodels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace TestCentral.Controllers
 { 
-	public class OptionsController : Controller
+	public class OptionController : Controller
 	{
 		private TestDBContext context; //place holder
 		
-		public OptionsController(TestDBContext dbContext) //placeholder until we have db
+		public OptionController(TestDBContext dbContext) //placeholder until we have db
         {
 			context = dbContext;
         }
@@ -21,13 +22,13 @@ namespace TestCentral.Controllers
 		// GET: /<controller>/
 		public IActionResult Index()
         {
-			List<Options> options = context.Options.ToList();
+			List<Option> options = context.Options.ToList();
 			return View(options);
         }
 
 		public IActionResult Add()
         {
-			Options option = new Models.Options();
+			Option option = new Models.Option();
 			return View(option);
         }
 

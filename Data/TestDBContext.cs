@@ -10,8 +10,8 @@ namespace TestCentral.Data
     public class TestDBContext : DbContext
     {
         //public DbSet<User> User { get; set; }
-        public DbSet<Test> Test { get; set; }
-        public DbSet<Questions> Questions { get; set; }
-        public DbSet<Options> Options { get; set; }
+        public DbSet<Test> Tests { get; set; }
+        public DbSet<Question> Questions { get; set; }
+        public DbSet<Option> Options { get; set; }
     }
 }

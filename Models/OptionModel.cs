@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TestCentral.Models
 {
-    public class Options
+    public class Option
     {
         public int Id { get; set; }
         public int QuestionId { get; set; }
@@ -13,7 +13,7 @@ namespace TestCentral.Models
         public string Label { get; set; }
 
 
-        public Options() { }
+        public Option() { }
 
         
     }
