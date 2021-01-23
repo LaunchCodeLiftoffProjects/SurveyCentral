@@ -6,6 +6,8 @@ using TestCentral.Viewmodels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
+using TestCentral.Models;
+using Options = TestCentral.Models.Options;
 
 namespace TestCentral.Controllers
 { 
