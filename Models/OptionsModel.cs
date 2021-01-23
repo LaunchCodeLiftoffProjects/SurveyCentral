@@ -15,5 +15,10 @@ namespace TestCentral.Models
 
         public OptionsModel() { }
 
+        public OptionsModel(string value, string label) 
+        {
+            Value = value;
+            Label = label;
+        }
     }
 }
