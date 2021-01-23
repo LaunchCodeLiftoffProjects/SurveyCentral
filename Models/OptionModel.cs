@@ -5,18 +5,18 @@ using System.Threading.Tasks;
 
 namespace TestCentral.Models
 {
-    public class Options
+    public class Option
     {
         public int Id { get; set; }
-        public Questions Question { get; set; }
+        public Question Question { get; set; }
         public int QuestionId { get; set; }
         public string Value { get; set; }
         public string Label { get; set; }
 
 
-        public Options() { }
+        public Option() { }
 
-        public Options(string value, string label)
+        public Option(string value, string label)
         {
             Value = value;
             Label = label;

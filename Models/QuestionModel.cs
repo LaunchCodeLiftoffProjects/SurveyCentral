@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace TestCentral.Models
 {
-    public class Questions
+    public class Question
     {
         public int Id { get; set; }
         public Test Test { get; set; }
@@ -19,12 +19,12 @@ namespace TestCentral.Models
         public string Answer { get; set; }
 
 
-        public Questions() 
+        public Question() 
         {
 
         }
 
-        public Questions(string prompt, string imgRelatedToPrompt, string type, string answer)
+        public Question(string prompt, string imgRelatedToPrompt, string type, string answer)
         {
             Prompt = prompt;
             ImgRelatedToPrompt = imgRelatedToPrompt;
