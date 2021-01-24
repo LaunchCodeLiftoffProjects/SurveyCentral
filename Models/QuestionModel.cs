@@ -11,7 +11,7 @@ namespace TestCentral.Models
         public Test Test { get; set; }
         public int TestId { get; set; }
         //placeholder until we have User objects
-        public User User { get; set; }
+        //public User User { get; set; }
         public int UserId { get; set; }
         public string Prompt { get; set; }
         public string ImgRelatedToPrompt { get; set; }
