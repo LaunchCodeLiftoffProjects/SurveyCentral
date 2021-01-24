@@ -31,7 +31,7 @@ namespace TestCentral.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcessAddTestForm(AddTestViewModel addTestViewModel)
+        public IActionResult ProcessAddTestForm(AddTestViewModel addTestViewModel, List<Question> questions)
         {
             if(ModelState.IsValid)
             {
@@ -45,6 +45,20 @@ namespace TestCentral.Controllers
 
                 context.Tests.Add(newTest);
                 context.SaveChanges();
+
+                foreach (Question question in questions)
+                {
+                    Question newQuestion = new Question {
+                        TestId = newTest.Id,
+                        Prompt = questions.Prompt,
+                        Type = questions.Type,
+                        Answer = questions.Answer,
+                        ImgRelatedToPrompt = questions.ImgRelatedToPrompt
+                    };
+
+                    context.Questions.Add(newQuestion);
+                }
+               
                 return Redirect("/Test");
             }
             return View("Add", addTestViewModel);
