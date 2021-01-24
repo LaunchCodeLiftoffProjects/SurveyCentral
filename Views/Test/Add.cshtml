@@ -1,0 +1,17 @@
+﻿@model TestCentral.ViewModels.AddTestViewModel
+
+<h1>Create New Test</h1>
+
+<form asp-controller="Test" asp-action="ProcessAddTestForm" method="post">
+    <div class="form-group">
+        <label asp-for="NameOfTest">Test Name:</label>
+        <input asp-for="NameOfTest" />
+        <span asp-validation-for="NameOfTest"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Description">Test Description:</label>
+        <input asp-for="Description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+    <input type="submit" value="Create Test" />
+</form>

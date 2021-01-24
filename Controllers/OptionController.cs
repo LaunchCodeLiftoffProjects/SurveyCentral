@@ -2,16 +2,14 @@
 using TestCentral.Models;
 using Microsoft.EntityFrameworkCore;
 using TestCentral.Data;
-using TestCentral.Viewmodels;
+using TestCentral.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using System.Collections.Generic;
-<<<<<<< HEAD:Controllers/OptionsController.cs
 using TestCentral.Models;
-using Options = TestCentral.Models.Options;
-=======
+using Options = TestCentral.Models.Option;
 using System.Linq;
->>>>>>> f10f30ed0d2b429aa32f5859c8709210f523240e:Controllers/OptionController.cs
+
 
 namespace TestCentral.Controllers
 { 
