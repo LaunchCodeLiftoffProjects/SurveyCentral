@@ -4,16 +4,23 @@ using System.Linq;
 using System.Threading.Tasks;
 using TestCentral.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
 
 namespace TestCentral.Data
 {
-    public class UserDbContext: DbContext
+    public class UserDbContext: IdentityDbContext<IdentityUser>
     {
-        public DbSet<User> Users { get; set; }
+        public new DbSet<User> Users { get; set; }
 
         public UserDbContext(DbContextOptions<UserDbContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

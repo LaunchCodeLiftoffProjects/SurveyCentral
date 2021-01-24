@@ -10,9 +10,10 @@ using TestCentral.Models;
 using TestCentral.ViewModels;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace TestCentral.Controllers
-{
+{   [Authorize]
     public class UserController : Controller
     {
         private UserDbContext context;
