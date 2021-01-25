@@ -32,6 +32,7 @@ namespace TestCentral.ViewModels
             Options = question.Options;
         }
 
+        public AddQuestionViewModel() { }
         
 
         

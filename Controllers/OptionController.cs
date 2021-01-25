@@ -15,7 +15,7 @@ namespace TestCentral.Controllers
 { 
 	public class OptionController : Controller
 	{
-		private TestDBContext context; //place holder
+		private TestDBContext context; 
 		
 		public OptionController(TestDBContext dbContext) //placeholder until we have db
         {
@@ -26,18 +26,42 @@ namespace TestCentral.Controllers
 		public IActionResult Index()
         {
 			List<Option> options = context.Options.ToList();
+
 			return View(options);
         }
 
+		
 		public IActionResult Add()
         {
-			Option option = new Models.Option();
-			return View(option);
+			AddOptionsViewModel addOptionsViewModel = new AddOptionsViewModel();
+			return View(addOptionsViewModel);
         }
 
-		
+		[HttpPost]
+		public IActionResult ProcessAddOptionForm(AddOptionsViewModel addOptionsViewModel)
+        {
+			if(ModelState.IsValid)
+            {
+				foreach(Option option in addOptionsViewModel.Options)
+                {
+					Option newOption = new Option
+					{
+						Value = option.Value,
+						Label = option.Label
+					};
+				
+				context.Options.Add(newOption);
+                }
+				
+				context.SaveChanges();
+				return Redirect("/Options");
+            }
+			
+			return View("Add", addOptionsViewModel);
+        }
 
-		
+
+
 	}
 
 }
