@@ -50,16 +50,16 @@ namespace TestCentral.Controllers
                 {
                     Question newQuestion = new Question {
                         TestId = newTest.Id,
-                        Prompt = question.Prompt, //these are getting highlighted because it needs to be question instead of questions
+                        Prompt = question.Prompt,
                         Type = question.Type,
                         Answer = question.Answer,
                         ImgRelatedToPrompt = question.ImgRelatedToPrompt
                     };
 
-                    context.Questions.Add(newQuestion);
-                    //do we need to save changes again?
+                    context.Questions.Add(newQuestion);                   
                 }
-               
+
+                context.SaveChanges();
                 return Redirect("/Test");
             }
             return View("Add", addTestViewModel);
