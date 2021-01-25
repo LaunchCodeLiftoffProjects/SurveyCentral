@@ -15,7 +15,7 @@ namespace TestCentral.Data
         public DbSet<Question> Questions { get; set; }
         public DbSet<Option> Options { get; set; }
 
-        //Setup constructor to extend base class construcotr (19.2 in textbook for reference)
+        //Setup constructor to extend base class constructor (19.2 in textbook for reference)
         public TestDBContext(DbContextOptions<TestDBContext> options) : base(options)
         {
 
