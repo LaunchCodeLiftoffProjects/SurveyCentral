@@ -17,6 +17,11 @@ namespace TestCentral.Models
         public string ImgRelatedToPrompt { get; set; }
         public string Type { get; set; }
         public string Answer { get; set; }
+        
+        //Do we need another prop for the List of options?
+        public List<Option> Options { get; set; }
+
+        
 
 
         public Question() 
@@ -24,12 +29,13 @@ namespace TestCentral.Models
 
         }
 
-        public Question(string prompt, string imgRelatedToPrompt, string type, string answer)
+        public Question(string prompt, string imgRelatedToPrompt, string type, string answer, List<Option> options)
         {
             Prompt = prompt;
             ImgRelatedToPrompt = imgRelatedToPrompt;
             Type = type;
             Answer = answer;
+            Options = options;
         }
     }
 }
