@@ -50,10 +50,10 @@ namespace TestCentral.Controllers
                 {
                     Question newQuestion = new Question {
                         TestId = newTest.Id,
-                        Prompt = questions.Prompt, //these are getting highlighted because it needs to be question instead of questions
-                        Type = questions.Type,
-                        Answer = questions.Answer,
-                        ImgRelatedToPrompt = questions.ImgRelatedToPrompt
+                        Prompt = question.Prompt, //these are getting highlighted because it needs to be question instead of questions
+                        Type = question.Type,
+                        Answer = question.Answer,
+                        ImgRelatedToPrompt = question.ImgRelatedToPrompt
                     };
 
                     context.Questions.Add(newQuestion);
