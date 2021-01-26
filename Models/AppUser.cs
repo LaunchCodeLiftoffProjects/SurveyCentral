@@ -1,29 +1,27 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Identity;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace TestCentral.Models
 {
-    public class User
-    {
-        public int Id { get; set; }
-        public string EmailAddress { get; set; }
-        public string Password { get; set; }
+    public class AppUser: IdentityUser
+    {   [PersonalData]
         public string FirstName { get; set; }
+        [PersonalData]
         public string LastName { get; set; }
+        [PersonalData]
         public string SchoolName { get; set; }
-
+        [PersonalData]
         public string Emoji { get; set; }
 
-        public User()
+        public AppUser()
         { 
         }
 
-        public User(string emailAddress, string password, string firstName, string lastName, string schoolName, string emoji)
+        public AppUser(string firstName, string lastName, string schoolName, string emoji)
         {
-            EmailAddress = emailAddress;
-            Password = password;
             FirstName = firstName;
             LastName = lastName;
             SchoolName = schoolName;

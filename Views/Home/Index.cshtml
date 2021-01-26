@@ -1,9 +1,27 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+
+@{
     ViewData["Title"] = "Home Page";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-</div>
-<partial name="_LoginPartial" />
+@inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
+
+
+@if (SignInManager.IsSignedIn(User))
+{
+    <div class="text-center">
+        <h1 class="display-4">Hello @UserManager.GetUserName(User)!</h1>
+    </div>
+
+
+}
+else
+{
+    <div class="text-center">
+        <h1 class="display-4">Welcome</h1>
+    </div>
+}
+
+
 

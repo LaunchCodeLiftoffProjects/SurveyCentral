@@ -45,10 +45,8 @@ namespace TestCentral.Controllers
 
             if (ModelState.IsValid)
             {
-                User theUser = new User
+                AppUser theUser = new AppUser
                 {
-                    EmailAddress = viewModel.EmailAddress,
-                    Password = viewModel.Password,
                     FirstName = viewModel.FirstName,
                     LastName = viewModel.LastName,
                     SchoolName = viewModel.SchoolName,
