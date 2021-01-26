@@ -25,7 +25,7 @@ namespace TestCentral.ViewModels
         public List<Option> Options { get; set; }
         
 
-        //Nathan
+        
         public AddTestViewModel(List<Question> possibleQuestions, List<Option> possibleOptions)
         {
             Questions = new List<Question>();
@@ -34,7 +34,11 @@ namespace TestCentral.ViewModels
             {
                 Questions.Add(new Question
                 {
-                    //fill in stuff
+                    Prompt = question.Prompt,
+                    ImgRelatedToPrompt = question.ImgRelatedToPrompt,
+                    Type = question.Type,
+                    Options = question.Options
+
                 });
             }
 
@@ -44,7 +48,8 @@ namespace TestCentral.ViewModels
             {
                 Options.Add(new Option
                 {
-                    //fill in stuff
+                    Value = option.Value,
+                    Label = option.Label
                 });
             }
         }
