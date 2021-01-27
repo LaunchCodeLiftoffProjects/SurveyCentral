@@ -56,11 +56,8 @@ namespace TestCentral.Areas.Identity.Pages.Account.Manage
 
             Input = new InputModel
             {
-                //FirstName = user.FirstName;
-                //LastName = user.LastName;
-                //SchoolName = user.SchoolName;
-                //Emoji = user.Emoji;
-                PhoneNumber = phoneNumber
+                    PhoneNumber = phoneNumber,                
+
             };
         }
 

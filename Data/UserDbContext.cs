@@ -11,7 +11,7 @@ namespace TestCentral.Data
 {
     public class UserDbContext: IdentityDbContext<IdentityUser>
     {
-        public new DbSet<AppUser> Users { get; set; }
+        public new DbSet<User> Users { get; set; }
 
         public UserDbContext(DbContextOptions<UserDbContext> options)
             : base(options)

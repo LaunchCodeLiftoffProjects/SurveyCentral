@@ -45,7 +45,7 @@ namespace TestCentral.Controllers
 
             if (ModelState.IsValid)
             {
-                AppUser theUser = new AppUser
+                User theUser = new User
                 {
                     FirstName = viewModel.FirstName,
                     LastName = viewModel.LastName,

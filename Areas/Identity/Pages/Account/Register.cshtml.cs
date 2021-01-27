@@ -13,6 +13,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using TestCentral.Models;
 
 namespace TestCentral.Areas.Identity.Pages.Account
 {
@@ -60,6 +61,30 @@ namespace TestCentral.Areas.Identity.Pages.Account
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
             public string ConfirmPassword { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "First Name")]
+            [StringLength(100, ErrorMessage = "The {0} must be max {1} characters long.")]
+            public string FirstName { get; set; }
+
+            [Required]
+            [DataType(DataType.Text)]
+            [Display(Name = "Last Name")]
+            [StringLength(100, ErrorMessage = "The {0} must be max {1} characters long.")]
+            public string LastName { get; set; }
+
+            [DataType(DataType.Text)]
+            [Display(Name = "School Name")]
+            [StringLength(100, ErrorMessage = "The {0} must be max {1} characters long.")]
+            public string SchoolName { get; set; }
+
+
+            [DataType(DataType.Text)]
+            [Display(Name = "Emoji (Windows Key + .)")]
+            [StringLength(30, ErrorMessage = "The {0} must be max {1} characters long.")]
+            public string Emoji { get; set; }
+
         }
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -74,7 +99,7 @@ namespace TestCentral.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new IdentityUser { UserName = Input.Email, Email = Input.Email };
+                var user = new User { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName, SchoolName = Input.SchoolName, Emoji = Input.Emoji};
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {

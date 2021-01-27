@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TestCentral.Models
 {
-    public class AppUser: IdentityUser
+    public class User: IdentityUser
     {   [PersonalData]
         public string FirstName { get; set; }
         [PersonalData]
@@ -16,11 +16,11 @@ namespace TestCentral.Models
         [PersonalData]
         public string Emoji { get; set; }
 
-        public AppUser()
+        public User()
         { 
         }
 
-        public AppUser(string firstName, string lastName, string schoolName, string emoji)
+        public User(string firstName, string lastName, string schoolName, string emoji)
         {
             FirstName = firstName;
             LastName = lastName;
