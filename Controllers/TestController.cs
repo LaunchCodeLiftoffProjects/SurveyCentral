@@ -64,5 +64,12 @@ namespace TestCentral.Controllers
             }
             return View("Add", addTestViewModel);
         }
+
+        public IActionResult ViewTest(int id) //Not sure of the view yet, but wanted to get this in place
+        {
+            Test test = context.Tests.Find(id);
+
+            return View(test);
+        }
     }
 }
