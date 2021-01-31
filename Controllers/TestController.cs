@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -65,11 +66,39 @@ namespace TestCentral.Controllers
             return View("Add", addTestViewModel);
         }
 
-        public IActionResult ViewTest(int id) //Not sure of the view yet, but wanted to get this in place
+        [HttpPost]
+        public IActionResult ViewTest(int testId) //Not sure of the view yet, but wanted to get this in place
         {
-            Test test = context.Tests.Find(id);
+            Test test = context.Tests.Find(testId);
 
-            return View(test);
+            return View(test); //hasn't been fully built yet, currently built on index
+        }
+
+        [HttpPost]
+        public IActionResult Delete(int testId) // this could be an array to delete multiple tests
+        {
+            Test theTest = context.Tests.Find(testId);
+            context.Tests.Remove(theTest);
+            context.SaveChanges();
+
+            return Redirect("/Index");
+        }
+
+        
+        [HttpPost]
+        public IActionResult UpdateTest(int testId) //Trying to figure out how to get it to allow update and loading all the info
+        {
+            Test test = context.Tests.Find(testId);
+
+            List<Question> questions = context.Questions
+                .Where(q => q.TestId == testId)
+                .Include(q => q.Options)
+                .ToList();
+
+
+            AddTestViewModel viewModel = new AddTestViewModel(List<Question> questions); // Can we use the AddTestViewModel?
+            return View(AddTestViewModel); //Or potentially a EditViewTestModel 
         }
     }
+    
 }
