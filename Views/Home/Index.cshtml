@@ -23,37 +23,35 @@
             <label for="description">Description:</label>
             <input type="text" id="description" name="description">
         </div>
-
         <h2>Questions</h2>
-
-        <div id="questionCount">
-            <!-- will increment for each new question -->
-            <h3>Question 1</h3>
-        </div>
-
-        <!-- <div>
-          <button id="button-edit">Edit</button>
-          <button id="button-delete">Delete</button>
-        </div> -->
-
-        <div>
-            <label for="questionType">Type:</label>
-            <select name="questionType" id="questionType" onchange="populate(this.id, 'restOfQuestion')">
-                <option value="">Select One</option>
-                <option value="trueFalse">True/False</option>
-                <option value="multipleChoice">Multiple Choice</option>
-                <option value="textInput">Text Input</option>
-            </select>
-        </div><br>
-        <div>
-            <label for="prompt">Prompt:</label>
-            <input type="text" id="prompt" name="prompt">
-        </div><br>
-        <div id="restOfQuestion">
+        <div id="questionsSection">
+            <div id="q1">
+                <h3>Question 1</h3>
+                <div>
+                    <label for="questionType">Type:</label>
+                    <!-- <select name="questionType" id="questionType" onchange="populate(this.id, 'restOfQuestion')"> -->
+                    <select name="questionType" id="questionType" onchange="populate(this.id)">
+                        <option value="">Select One</option>
+                        <option value="trueFalse">True/False</option>
+                        <option value="multipleChoice">Multiple Choice</option>
+                        <option value="textInput">Text Input</option>
+                    </select>
+                </div><br>
+                <div>
+                    <label for="prompt">Prompt:</label>
+                    <input type="text" id="prompt" name="prompt">
+                </div><br>
+                <div>
+                    <label for="imageLink">Add Link to Image (optional):</label>
+                    <input type="text" id="imageLink" name="imageLink">
+                </div>
+                <div id="restOfQuestion1">
+                </div>
+            </div>
         </div>
         <br>
         <div>
-            <button id="add-question">Add Another Question</button><br>
+            <button id="addQuestion">Add Another Question</button><br>
             <button id="submit">Finish and Save Test</button><br>
             <button id="discard">Discard Test</button>
         </div>
