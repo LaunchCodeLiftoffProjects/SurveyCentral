@@ -2,59 +2,7 @@
     ViewData["Title"] = "Home Page";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width">
-    <title></title>
-    <link href="site.css" rel="stylesheet" type="text/css" />
-    <script src="site.js"></script>
-</head>
-<body>
-    <h1>Create a Test</h1>
-
-    <form action="" method="post">
-        <div>
-            <label for="testName">Title:</label>
-            <input type="text" id="testName" name="testName">
-        </div><br>
-        <div>
-            <label for="description">Description:</label>
-            <input type="text" id="description" name="description">
-        </div>
-        <h2>Questions</h2>
-        <div id="questionsSection">
-            <div id="q1">
-                <h3>Question 1</h3>
-                <div>
-                    <label for="questionType">Type:</label>
-                    <!-- <select name="questionType" id="questionType" onchange="populate(this.id, 'restOfQuestion')"> -->
-                    <select name="questionType" id="questionType" onchange="populate(this.id)">
-                        <option value="">Select One</option>
-                        <option value="trueFalse">True/False</option>
-                        <option value="multipleChoice">Multiple Choice</option>
-                        <option value="textInput">Text Input</option>
-                    </select>
-                </div><br>
-                <div>
-                    <label for="prompt">Prompt:</label>
-                    <input type="text" id="prompt" name="prompt">
-                </div><br>
-                <div>
-                    <label for="imageLink">Add Link to Image (optional):</label>
-                    <input type="text" id="imageLink" name="imageLink">
-                </div>
-                <div id="restOfQuestion1">
-                </div>
-            </div>
-        </div>
-        <br>
-        <div>
-            <button id="addQuestion">Add Another Question</button><br>
-            <button id="submit">Finish and Save Test</button><br>
-            <button id="discard">Discard Test</button>
-        </div>
-    </form>
-</body>
-</html>
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
