@@ -4,6 +4,41 @@
 @inject SignInManager<IdentityUser> SignInManager
 @inject UserManager<IdentityUser> UserManager
 
+    <style>
+        .sidebar {
+            margin: 0;
+            padding: 0;
+            width: 200px;
+            background-color: #f1f1f1;
+            position: fixed;
+            height: 100%;
+            overflow: auto;
+        }
+
+            .sidebar a {
+                display: block;
+                color: black;
+                padding: 16px;
+                text-decoration: none;
+            }
+
+                .sidebar a.active {
+                    background-color: #467fd0;
+                    color: white;
+                }
+
+                .sidebar a:hover:not(.active) {
+                    background-color: #555;
+                    color: white;
+                }
+
+        div.content {
+            margin-left: 200px;
+            padding: 1px 16px;
+            height: 1000px;
+        }
+    </style>
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -12,10 +47,12 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
+
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
+                @* Add Final App Name Below*@
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TestCentral</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
@@ -43,25 +80,35 @@
                                 <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
                             </li>
                         }
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="AddTest">Add a Test</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="TestBank">View Tests</a>
-                        </li>
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+    @if (SignInManager.IsSignedIn(User))
+    {
+<div class="row">
+    <div class="sidebar">
+                <a class="nav-link" asp-controller="" asp-action=""> Test Bank </a>
+                <a class="nav-link" asp-controller="" asp-action=""> Add a Test </a>
+                 <a class="nav-link" asp-controller="adduser"> Profile </a>
+    </div>
+</div>
     <div class="container">
-        <main role="main" class="pb-3">
+        <main role="main" class="col-9" style="text-align: justify;">
             @RenderBody()
         </main>
     </div>
+    } else { 
+
+    <div class="container">
+        <main role="main" class="col-9" style="text-align: justify;">
+            @RenderBody()
+        </main>
+    </div>
+    }
+
 
     <footer class="border-top footer text-muted">
         <div class="container">
