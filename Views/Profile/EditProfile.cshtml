@@ -1,8 +1,7 @@
-﻿@model TestCentral.ViewModels.AddUserViewModel
+﻿@model TestCentral.ViewModels.EditProfileViewModel
 
 <h1>Edit Profile</h1>
-
-<form autocomplete="off" asp-controller="User" asp-action="ProcessAddUserForm" method="post">
+<form autocomplete="off" asp-controller="Profile" asp-action="SubmitEditProfileForm" method="post">
 
     <div class="form-group">
         <label>First Name</label>
@@ -42,6 +41,6 @@
         <br />
     </div>
 
-    <input type="submit" value="Sign up" />
+    <input type="submit" value="Submit Changes" />
 
 </form>
