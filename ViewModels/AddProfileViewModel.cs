@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace TestCentral.ViewModels
 {
-    public class AddUserViewModel
+    public class AddProfileViewModel
     {
        [Required(ErrorMessage = "First name is required.")]
         public string FirstName { get; set; }
