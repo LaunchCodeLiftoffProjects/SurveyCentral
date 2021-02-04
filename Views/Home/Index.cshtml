@@ -4,8 +4,8 @@
     ViewData["Title"] = "Home Page";
 }
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<TestUser> SignInManager
+@inject UserManager<TestUser> UserManager
 
 
 @if (SignInManager.IsSignedIn(User))

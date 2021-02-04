@@ -8,9 +8,9 @@ using TestCentral.Data;
 
 namespace TestCentral.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
-    [Migration("20210124222616_Identity Added")]
-    partial class IdentityAdded
+    [DbContext(typeof(TestUserDbContext))]
+    [Migration("20210204045932_Identity and User Profile Added")]
+    partial class IdentityandUserProfileAdded
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -80,6 +80,10 @@ namespace TestCentral.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
+                    b.Property<string>("Discriminator")
+                        .IsRequired()
+                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+
                     b.Property<string>("Email")
                         .HasColumnType("varchar(256) CHARACTER SET utf8mb4")
                         .HasMaxLength(256);
@@ -130,6 +134,8 @@ namespace TestCentral.Migrations
                         .HasName("UserNameIndex");
 
                     b.ToTable("AspNetUsers");
+
+                    b.HasDiscriminator<string>("Discriminator").HasValue("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
@@ -215,14 +221,9 @@ namespace TestCentral.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TestCentral.Models.User", b =>
+            modelBuilder.Entity("TestCentral.Models.TestUser", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    b.Property<string>("EmailAddress")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
+                    b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
                     b.Property<string>("Emoji")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
@@ -233,15 +234,10 @@ namespace TestCentral.Migrations
                     b.Property<string>("LastName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.Property<string>("Password")
-                        .HasColumnType("longtext CHARACTER SET utf8mb4");
-
                     b.Property<string>("SchoolName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasKey("Id");
-
-                    b.ToTable("Users");
+                    b.HasDiscriminator().HasValue("TestUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

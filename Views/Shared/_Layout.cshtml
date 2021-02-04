@@ -1,8 +1,8 @@
 ﻿<!DOCTYPE html>
 @using Microsoft.AspNetCore.Identity
 
-@inject SignInManager<IdentityUser> SignInManager
-@inject UserManager<IdentityUser> UserManager
+@inject SignInManager<TestUser> SignInManager
+@inject UserManager<TestUser> UserManager
 
     <style>
         .sidebar {
@@ -90,9 +90,20 @@
     {
 <div class="row">
     <div class="sidebar">
-                <a class="nav-link" asp-controller="" asp-action=""> Test Bank </a>
-                <a class="nav-link" asp-controller="" asp-action=""> Add a Test </a>
-                 <a class="nav-link" asp-controller="adduser"> Profile </a>
+        <li class="active">
+            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+            <ul class="collapse list-unstyled" id="homeSubmenu">
+                <li>
+                    <a href="#">Home 1</a>
+                </li>
+                <li>
+                    <a href="#">Home 2</a>
+                </li>
+                <li>
+                    <a href="#">Home 3</a>
+                </li>
+            </ul>
+        </li>
     </div>
 </div>
     <div class="container">

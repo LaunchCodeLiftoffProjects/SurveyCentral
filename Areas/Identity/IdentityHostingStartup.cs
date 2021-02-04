@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using TestCentral.Data;
+using TestCentral.Models;
 
 [assembly: HostingStartup(typeof(TestCentral.Areas.Identity.IdentityHostingStartup))]
 namespace TestCentral.Areas.Identity
@@ -15,12 +16,12 @@ namespace TestCentral.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<UserDbContext>(options =>
+                services.AddDbContext<TestUserDbContext>(options =>
                     options.UseMySql(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
-                    .AddEntityFrameworkStores<UserDbContext>();
+                services.AddDefaultIdentity<TestUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                    .AddEntityFrameworkStores<TestUserDbContext>();
             });
         }
     }

@@ -2,17 +2,15 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TestCentral.Data;
 
 namespace TestCentral.Migrations
 {
-    [DbContext(typeof(UserDbContext))]
-    [Migration("20210127000844_ExtendedUser")]
-    partial class ExtendedUser
+    [DbContext(typeof(TestUserDbContext))]
+    partial class TestUserDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -221,7 +219,7 @@ namespace TestCentral.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("TestCentral.Models.User", b =>
+            modelBuilder.Entity("TestCentral.Models.TestUser", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityUser");
 
@@ -237,7 +235,7 @@ namespace TestCentral.Migrations
                     b.Property<string>("SchoolName")
                         .HasColumnType("longtext CHARACTER SET utf8mb4");
 
-                    b.HasDiscriminator().HasValue("User");
+                    b.HasDiscriminator().HasValue("TestUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
