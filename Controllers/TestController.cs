@@ -104,8 +104,8 @@ namespace TestCentral.Controllers
         [HttpGet]
         public IActionResult UpdateTest(int testId)
         {
-            
-            EditTestViewModel editTestViewModel = new EditTestViewModel(int testId);
+            Test theTest context.Tests.Find(testId);
+            EditTestViewModel editTestViewModel = new EditTestViewModel(Test theTest);
             
 
 
@@ -117,16 +117,13 @@ namespace TestCentral.Controllers
         public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
         {
             Test test = context.Tests.Find(testId);
-
-            List<Question> questions = context.Questions
-                .Where(q => q.TestId == testId)
-                .Include(q => q.Options)
-                .ToList();
+            //find the test, replace the properties , save it to the db
+             
 
 
-            EditTestViewModel editViewModel = new EditTestViewModel(Test test); 
+             
             
-            return View("Edit", editViewModel); 
+            return View("/Index"); 
         }
         
     }
