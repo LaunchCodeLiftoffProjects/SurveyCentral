@@ -126,6 +126,8 @@ namespace TestCentral.Areas.Identity.Pages.Account.Manage
                 user.Emoji = Input.Emoji;
             }
 
+            await _userManager.UpdateAsync(user);
+
             await _signInManager.RefreshSignInAsync(user);
             StatusMessage = "Your profile has been updated";
             return RedirectToPage();
