@@ -86,6 +86,17 @@ namespace TestCentral.Controllers
             return Redirect("/Index");
         }
 
+        [HttpGet]
+        public IActionResult UpdateTest(int testId)
+        {
+            
+            EditTestViewModel editTestViewModel = new EditTestViewModel(int testId);
+            
+
+
+            return View(editTestViewModel);
+            
+        }
         
         [HttpPost]
         public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info

@@ -24,9 +24,10 @@ namespace TestCentral.ViewModels
 
 
 
-        public EditTestViewModel(Test test)
+        public EditTestViewModel(int testId)
         {
            //WIP
+
         }
 
         public EditTestViewModel() { }
