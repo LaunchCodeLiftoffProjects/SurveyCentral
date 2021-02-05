@@ -1,6 +1,38 @@
-﻿//Populates rest of question once user selects type from dropdown:
+﻿//Adds next question for user to fill out upon clicking Add Question button:
 
-let questionCounter = 1;
+let questionCounter = 0;
+
+function addNewQuestion() {
+    questionCounter++;
+
+    let addQuestionNode = document.createElement("div");
+    addQuestionNode.id = `q${questionCounter}`;
+
+    addQuestionNode.innerHTML = `<h3>Question ${questionCounter}</h3>
+    <div>
+        <label for="questionType${questionCounter}">Type:</label>
+        <select name="questionType${questionCounter}" id="questionType${questionCounter}" onchange="populate(this.id)">
+            <option value="${questionCounter}">Select One</option>
+            <option value="trueFalse${questionCounter}">True/False</option>
+            <option value="multipleChoice${questionCounter}">Multiple Choice</option>
+            <option value="textInput${questionCounter}">Text Input</option>
+        </select>
+    </div><br>
+    <div>
+        <label for="prompt${questionCounter}">Prompt:</label>
+        <input type="text" id="prompt${questionCounter}" name="prompt${questionCounter}">
+    </div><br>
+    <div>
+      <label for="imageLink${questionCounter}">Add Link to Image (optional):</label>
+      <input type="text" id="imageLink${questionCounter}" name="imageLink${questionCounter}">
+    </div>
+    <div id="restOfQuestion${questionCounter}">
+    </div>`;
+
+    document.getElementById("questionsSection").appendChild(addQuestionNode);
+}
+
+//Populates rest of question once user selects type from dropdown:
 
 function populate(s1) {
     var s1 = document.getElementById(s1);
@@ -40,38 +72,6 @@ function populate(s1) {
         s2.innerHTML = `<label for="input${questionCounter}">Correct Answer:</label>
             <input type="text" id="input${questionCounter}" name="input${questionCounter}">`;
     }
-}
-
-//Adds next question for user to fill out upon clicking Add Question button:
-
-function addNewQuestion() {
-    questionCounter++;
-
-    let addQuestionNode = document.createElement("div");
-    addQuestionNode.id = `q${questionCounter}`;
-
-    addQuestionNode.innerHTML = `<h3>Question ${questionCounter}</h3>
-    <div>
-        <label for="questionType${questionCounter}">Type:</label>
-        <select name="questionType${questionCounter}" id="questionType${questionCounter}" onchange="populate(this.id)">
-            <option value="${questionCounter}">Select One</option>
-            <option value="trueFalse${questionCounter}">True/False</option>
-            <option value="multipleChoice${questionCounter}">Multiple Choice</option>
-            <option value="textInput${questionCounter}">Text Input</option>
-        </select>
-    </div><br>
-    <div>
-        <label for="prompt${questionCounter}">Prompt:</label>
-        <input type="text" id="prompt${questionCounter}" name="prompt${questionCounter}">
-    </div><br>
-    <div>
-      <label for="imageLink${questionCounter}">Add Link to Image (optional):</label>
-      <input type="text" id="imageLink${questionCounter}" name="imageLink${questionCounter}">
-    </div>
-    <div id="restOfQuestion${questionCounter}">
-    </div>`;
-
-    document.getElementById("questionsSection").appendChild(addQuestionNode);
 }
 
 //Prevents form from sending upon click on Add Question button
