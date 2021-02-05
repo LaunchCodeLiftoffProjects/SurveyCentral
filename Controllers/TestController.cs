@@ -41,7 +41,8 @@ namespace TestCentral.Controllers
                     NameOfTest = addTestViewModel.NameOfTest,
                     Description = addTestViewModel.Description,
                     UpdatedAt = DateTime.Now,
-                    CreatedAt = DateTime.Now             
+                    CreatedAt = DateTime.Now,
+                    Questions = addTestViewModel.Questions
                 };
 
                 context.Tests.Add(newTest);
@@ -54,8 +55,22 @@ namespace TestCentral.Controllers
                         Prompt = question.Prompt,
                         Type = question.Type,
                         Answer = question.Answer,
-                        ImgRelatedToPrompt = question.ImgRelatedToPrompt
+                        ImgRelatedToPrompt = question.ImgRelatedToPrompt,
+                        Options = question.Options
                     };
+
+                    foreach (Option option in newQuestion.Options)
+                    {
+                        Option newOption = new Option
+                        {
+                            QuestionId = newQuestion.Id,
+                            Value = option.Value,
+                            Label = option.Label
+                        };
+
+                        context.Options.Add(newOption);
+
+                    }
 
                     context.Questions.Add(newQuestion);                   
                 }
