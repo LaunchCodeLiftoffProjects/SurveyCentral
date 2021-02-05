@@ -86,9 +86,9 @@ namespace TestCentral.Controllers
             return Redirect("/Index");
         }
 
-        /*
+        
         [HttpPost]
-        public IActionResult UpdateTest(int testId) //Trying to figure out how to get it to allow update and loading all the info
+        public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
         {
             Test test = context.Tests.Find(testId);
 
@@ -98,10 +98,11 @@ namespace TestCentral.Controllers
                 .ToList();
 
 
-            AddTestViewModel viewModel = new AddTestViewModel(List<Question> questions); // Can we use the AddTestViewModel?
-            return View(AddTestViewModel); //Or potentially a EditViewTestModel 
+            EditTestViewModel editViewModel = new EditTestViewModel(Test test); 
+            
+            return View("Edit", editViewModel); 
         }
-        */
+        
     }
     
 }
