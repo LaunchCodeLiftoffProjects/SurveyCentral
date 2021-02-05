@@ -57,7 +57,7 @@ namespace TestCentral.Areas.Identity.Pages.Account.Manage
         private async Task LoadAsync(TestUser user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
-            var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+            //var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
 
             Username = userName;
 

@@ -5,12 +5,16 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Profile\**" />
     <Compile Remove="Views\TestUser\**" />
     <Compile Remove="Views\User\**" />
+    <Content Remove="Views\Profile\**" />
     <Content Remove="Views\TestUser\**" />
     <Content Remove="Views\User\**" />
+    <EmbeddedResource Remove="Views\Profile\**" />
     <EmbeddedResource Remove="Views\TestUser\**" />
     <EmbeddedResource Remove="Views\User\**" />
+    <None Remove="Views\Profile\**" />
     <None Remove="Views\TestUser\**" />
     <None Remove="Views\User\**" />
   </ItemGroup>
@@ -39,6 +43,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>
