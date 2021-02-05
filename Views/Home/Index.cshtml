@@ -13,7 +13,6 @@
 </head>
 <body>
     <h1>Create a Test</h1>
-
     <form action="" method="post">
         <div>
             <label for="testName">Title:</label>
@@ -25,25 +24,24 @@
         </div>
         <h2>Questions</h2>
         <div id="questionsSection">
-            <div id="q1">
+            <div id='q1'>
                 <h3>Question 1</h3>
                 <div>
-                    <label for="questionType">Type:</label>
-                    <!-- <select name="questionType" id="questionType" onchange="populate(this.id, 'restOfQuestion')"> -->
-                    <select name="questionType" id="questionType" onchange="populate(this.id)">
-                        <option value="">Select One</option>
-                        <option value="trueFalse">True/False</option>
-                        <option value="multipleChoice">Multiple Choice</option>
-                        <option value="textInput">Text Input</option>
+                    <label for="questionType1">Type:</label>
+                    <select name="questionType1" id="questionType1" onchange="populate(this.id)">
+                        <option value="1">Select One</option>
+                        <option value="trueFalse1">True/False</option>
+                        <option value="multipleChoice1">Multiple Choice</option>
+                        <option value="textInput1">Text Input</option>
                     </select>
                 </div><br>
                 <div>
-                    <label for="prompt">Prompt:</label>
-                    <input type="text" id="prompt" name="prompt">
+                    <label for="prompt1">Prompt:</label>
+                    <input type="text" id="prompt1" name="prompt1">
                 </div><br>
                 <div>
-                    <label for="imageLink">Add Link to Image (optional):</label>
-                    <input type="text" id="imageLink" name="imageLink">
+                    <label for="imageLink1">Add Link to Image (optional):</label>
+                    <input type="text" id="imageLink1" name="imageLink1">
                 </div>
                 <div id="restOfQuestion1">
                 </div>
