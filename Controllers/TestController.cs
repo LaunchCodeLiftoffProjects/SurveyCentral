@@ -101,21 +101,25 @@ namespace TestCentral.Controllers
             return Redirect("/Index");
         }
 
+        [HttpGet]
+        public IActionResult UpdateTest(int testId)
+        {
+            Test theTest = context.Tests.Find(testId);
+            EditTestViewModel editTestViewModel = new EditTestViewModel(theTest);
+            
+
+
+            return View(editTestViewModel);
+            
+        }
         
         [HttpPost]
         public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
         {
             Test test = context.Tests.Find(testId);
-
-            List<Question> questions = context.Questions
-                .Where(q => q.TestId == testId)
-                .Include(q => q.Options)
-                .ToList();
-
-
-            EditTestViewModel editViewModel = new EditTestViewModel(test); 
+            //find the test, replace the properties , save it to the db
             
-            return View("Edit", editViewModel); 
+            return View("/Index"); 
         }
         
     }

@@ -24,9 +24,10 @@ namespace TestCentral.ViewModels
 
 
 
-        public EditTestViewModel(Test test)
+        public EditTestViewModel(Test theTest)
         {
-           //WIP
+           //WIP make the test props = theTest props
+
         }
 
         public EditTestViewModel() { }
