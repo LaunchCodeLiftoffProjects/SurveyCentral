@@ -48,7 +48,7 @@ namespace TestCentral.Controllers
                 context.Tests.Add(newTest);
                 context.SaveChanges();
 
-                foreach (Question question in newTest.Questions)
+                foreach (Question question in newTest.Questions.ToList())
                 {
                     Question newQuestion = new Question {
                         TestId = newTest.Id,
@@ -59,9 +59,12 @@ namespace TestCentral.Controllers
                         Options = question.Options
                     };
 
+                    context.Questions.Add(newQuestion);
+                    context.SaveChanges();
+
                     if (newQuestion.Options != null)
                     {
-                        foreach (Option option in newQuestion.Options)
+                        foreach (Option option in newQuestion.Options.ToList())
                         {
                             Option newOption = new Option
                             {
@@ -69,12 +72,9 @@ namespace TestCentral.Controllers
                                 Value = option.Value,
                                 Label = option.Label
                             };
-
                             context.Options.Add(newOption);
-
                         }
                     }
-                    context.Questions.Add(newQuestion);
                     
                 }
 
