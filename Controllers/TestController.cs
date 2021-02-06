@@ -113,7 +113,7 @@ namespace TestCentral.Controllers
                 .ToList();
 
 
-            EditTestViewModel editViewModel = new EditTestViewModel(Test test); 
+            EditTestViewModel editViewModel = new EditTestViewModel(test); 
             
             return View("Edit", editViewModel); 
         }
