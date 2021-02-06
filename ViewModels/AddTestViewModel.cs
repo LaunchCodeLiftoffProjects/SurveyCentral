@@ -25,34 +25,6 @@ namespace TestCentral.ViewModels
         public List<Option> Options { get; set; }
         
 
-        
-        public AddTestViewModel(List<Question> possibleQuestions, List<Option> possibleOptions)
-        {
-            Questions = new List<Question>();
-
-            foreach(Question question in possibleQuestions)
-            {
-                Questions.Add(new Question
-                {
-                    Prompt = question.Prompt,
-                    ImgRelatedToPrompt = question.ImgRelatedToPrompt,
-                    Type = question.Type,
-                    Options = question.Options
-
-                });
-            }
-
-            Options = new List<Option>();
-
-            foreach (Option option in possibleOptions)
-            {
-                Options.Add(new Option
-                {
-                    Value = option.Value,
-                    Label = option.Label
-                });
-            }
-        }
 
         public AddTestViewModel() { }
     }

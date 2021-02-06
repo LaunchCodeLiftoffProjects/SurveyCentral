@@ -32,7 +32,7 @@ namespace TestCentral.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcessAddTestForm(AddTestViewModel addTestViewModel, List<Question> questions)
+        public IActionResult ProcessAddTestForm([FromBody]AddTestViewModel addTestViewModel)
         {
             if(ModelState.IsValid)
             {
@@ -48,7 +48,7 @@ namespace TestCentral.Controllers
                 context.Tests.Add(newTest);
                 context.SaveChanges();
 
-                foreach (Question question in questions)
+                foreach (Question question in newTest.Questions)
                 {
                     Question newQuestion = new Question {
                         TestId = newTest.Id,
@@ -59,20 +59,23 @@ namespace TestCentral.Controllers
                         Options = question.Options
                     };
 
-                    foreach (Option option in newQuestion.Options)
+                    if (newQuestion.Options != null)
                     {
-                        Option newOption = new Option
+                        foreach (Option option in newQuestion.Options)
                         {
-                            QuestionId = newQuestion.Id,
-                            Value = option.Value,
-                            Label = option.Label
-                        };
+                            Option newOption = new Option
+                            {
+                                QuestionId = newQuestion.Id,
+                                Value = option.Value,
+                                Label = option.Label
+                            };
 
-                        context.Options.Add(newOption);
+                            context.Options.Add(newOption);
 
+                        }
                     }
-
-                    context.Questions.Add(newQuestion);                   
+                    context.Questions.Add(newQuestion);
+                    
                 }
 
                 context.SaveChanges();
