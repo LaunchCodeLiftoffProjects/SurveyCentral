@@ -1,17 +1,31 @@
 ﻿@model TestCentral.ViewModels.AddTestViewModel
 
-<h1>Create New Test</h1>
-
-<form asp-controller="Test" asp-action="ProcessAddTestForm" method="post">
-    <div class="form-group">
-        <label asp-for="NameOfTest">Test Name:</label>
-        <input asp-for="NameOfTest" />
-        <span asp-validation-for="NameOfTest"></span>
-    </div>
-    <div class="form-group">
-        <label asp-for="Description">Test Description:</label>
-        <input asp-for="Description" />
-        <span asp-validation-for="Description"></span>
-    </div>
-    <input type="submit" value="Create Test" />
-</form>
+<head>
+    <meta charset="utf-8">
+    <title>Create New Test</title>
+    <link href="site.css" rel="stylesheet" type="text/css" />
+    <script src="site.js"></script>
+</head>
+<body>
+    <h1>Create New Test</h1>
+    <form asp-controller="Test" asp-action="ProcessAddTestForm" method="post">
+        <div class="form-group">
+            <label asp-for="NameOfTest">Test Name:</label>
+            <input asp-for="NameOfTest" type="text" id="nameOfTest" name="nameOfTest"/>
+            <span asp-validation-for="NameOfTest"></span>
+        </div>
+        <div class="form-group">
+            <label asp-for="Description">Test Description:</label>
+            <input asp-for="Description" type="text" id="description" name="description"/>
+            <span asp-validation-for="Description"></span>
+        </div>
+        <h2>Questions</h2>
+        <div id="questionsSection">
+        </div>
+        <div>
+            <button id="addQuestion">Add a Question</button><br>
+            <button id="submit">Finish and Save Test</button><br>
+            <button id="discard">Discard Test</button>
+        </div>
+    </form>
+</body>
