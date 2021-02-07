@@ -16,8 +16,11 @@ namespace TestCentral.ViewModels
         //[Required]
         [Required(ErrorMessage = "Description is required")]
         [StringLength(500, ErrorMessage = "Description too long!")]
-        public string Description { get; set; } 
+        public string Description { get; set; }
+
+        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime CreatedAt { get; set; }
+
         public DateTime UpdatedAt { get; set; }
 
         // I think we need to store the Id for the Prompt and Answers
