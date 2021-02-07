@@ -26,6 +26,12 @@ namespace TestCentral.ViewModels
         
 
 
+        public AddTestViewModel(List<Question> questions, List<Option> options) 
+        {
+            Questions = questions;
+            Options = options;
+        }
+
         public AddTestViewModel() { }
     }
 }
