@@ -24,16 +24,13 @@ namespace TestCentral.ViewModels
 
 
 
-        public EditTestViewModel(Test theTest, int testId) //need to get the options and questions loaded too
+        public EditTestViewModel(Test theTest) //need to get the options and questions loaded too
         {
             //WIP make the test props = theTest props
-            TestId = testId; //new prop to store the Id since it's not being made
             NameOfTest = theTest.NameOfTest;
             Description = theTest.Description;
             Questions = theTest.Questions;
             //Options = theTest.Options; //This isn't in the test model
-
-
 
         }
 

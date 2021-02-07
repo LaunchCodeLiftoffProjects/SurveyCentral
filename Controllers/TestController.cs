@@ -108,8 +108,13 @@ namespace TestCentral.Controllers
         [HttpGet]
         public IActionResult UpdateTest(int testId)
         {
-            Test theTest = context.Tests.Find(testId);
-            EditTestViewModel testBeingEdited = new EditTestViewModel(theTest, theTest.Id);
+            Test theTest = context.Tests
+                .Include(t => t.Questions)
+                .Single(t => t.Id == testId);
+
+            
+
+            EditTestViewModel testBeingEdited = new EditTestViewModel(theTest);
 
             return View(testBeingEdited);
             
@@ -119,7 +124,8 @@ namespace TestCentral.Controllers
         public IActionResult UpdateTest([FromBody]EditTestViewModel editTest) //Trying to figure out how to get it to allow update and loading all the info
         {
             Test test = context.Tests.Find(editTest.TestId); //find the old record
-            if (test != null)
+
+            if (ModelState.IsValid)
             {
                 test.Description = editTest.Description;
                 test.NameOfTest = editTest.NameOfTest;
@@ -128,8 +134,9 @@ namespace TestCentral.Controllers
                 //test.Options = editTest.Options; // Not in the test model, so we'll need to load it
 
                 context.Update(test);
-                context.SaveChanges();
+                //context.SaveChanges();
             }
+
             
             
             return View("/Index"); 
