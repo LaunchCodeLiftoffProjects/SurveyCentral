@@ -112,7 +112,8 @@ namespace TestCentral.Controllers
                 .Include(t => t.Questions)
                 .Single(t => t.Id == testId);
 
-            
+            //List<Question> testQuestions = theTest.Questions.ToList(); 
+           
 
             EditTestViewModel testBeingEdited = new EditTestViewModel(theTest);
 
@@ -125,6 +126,7 @@ namespace TestCentral.Controllers
         {
             Test test = context.Tests.Find(editTest.TestId); //find the old record
 
+            
             if (ModelState.IsValid)
             {
                 test.Description = editTest.Description;

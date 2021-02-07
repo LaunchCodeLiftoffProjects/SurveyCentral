@@ -26,12 +26,12 @@ namespace TestCentral.ViewModels
 
         public EditTestViewModel(Test theTest) //need to get the options and questions loaded too
         {
-            //WIP make the test props = theTest props
+            //This hopefully will autoload the info when someone clicks to edit the test.
             NameOfTest = theTest.NameOfTest;
             Description = theTest.Description;
-            Questions = theTest.Questions;
-            //Options = theTest.Options; //This isn't in the test model
+            Questions = theTest.Questions.ToList();
 
+            //How do I grab the options with the questions?
         }
 
         public EditTestViewModel() { }
