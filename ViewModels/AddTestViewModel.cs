@@ -18,7 +18,6 @@ namespace TestCentral.ViewModels
         [StringLength(500, ErrorMessage = "Description too long!")]
         public string Description { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:MM/dd/yyyy}")]
         public DateTime CreatedAt { get; set; }
 
         public DateTime UpdatedAt { get; set; }
