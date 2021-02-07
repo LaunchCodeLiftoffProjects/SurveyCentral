@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
 namespace TestCentral.Models
 {
@@ -17,6 +18,7 @@ namespace TestCentral.Models
         public string Prompt { get; set; }
         public string ImgRelatedToPrompt { get; set; }
         public string Type { get; set; }
+        [Required(ErrorMessage = "An answer is required")]
         public string Answer { get; set; }
         
         //Do we need another prop for the List of options?

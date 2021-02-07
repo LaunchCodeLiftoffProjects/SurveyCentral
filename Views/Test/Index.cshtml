@@ -1,4 +1,4 @@
-﻿@model IEnumerable<TestCentral.Models.Test>
+﻿@model List<TestCentral.Models.Test>
 
 @{
     ViewData["Title"] = "Index";
@@ -13,16 +13,16 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.NameOfTest)
+                Test Name
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Description)
+                Description
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.CreatedAt)
+                Created Date
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.UpdatedAt)
+                Last Updated
             </th>
             <th></th>
         </tr>
@@ -31,16 +31,16 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.NameOfTest)
-            </td>>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
+                @item.NameOfTest
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.CreatedAt)
+                @item.Description
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.UpdatedAt)
+                @item.CreatedAt.ToShortDateString()
+            </td>
+            <td>
+                @item.UpdatedAt.ToShortDateString()
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
