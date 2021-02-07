@@ -9,14 +9,14 @@ namespace TestCentral.ViewModels
 {
     public class EditTestViewModel
     {
+        public int TestId { get; set; }
         [Required(ErrorMessage = "Test name is required.")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Test name must be between 3 and 50 characters")]
         public string NameOfTest { get; set; }
         [Required(ErrorMessage = "Description is required")]
         [StringLength(500, ErrorMessage = "Description too long!")]
         public string Description { get; set; }
-        //public DateTime CreatedAt { get; set; } What shall we do with this?
-        public DateTime UpdatedAt { get; set; }
+
 
         // I think we need to store the Id for the Prompt and Answers
         public List<Question> Questions { get; set; }
@@ -24,9 +24,16 @@ namespace TestCentral.ViewModels
 
 
 
-        public EditTestViewModel(Test theTest)
+        public EditTestViewModel(Test theTest, int testId) //need to get the options and questions loaded too
         {
-           //WIP make the test props = theTest props
+            //WIP make the test props = theTest props
+            TestId = testId; //new prop to store the Id since it's not being made
+            NameOfTest = theTest.NameOfTest;
+            Description = theTest.Description;
+            Questions = theTest.Questions;
+            //Options = theTest.Options; //This isn't in the test model
+
+
 
         }
 

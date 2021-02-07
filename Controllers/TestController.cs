@@ -109,19 +109,28 @@ namespace TestCentral.Controllers
         public IActionResult UpdateTest(int testId)
         {
             Test theTest = context.Tests.Find(testId);
-            EditTestViewModel editTestViewModel = new EditTestViewModel(theTest);
-            
+            EditTestViewModel testBeingEdited = new EditTestViewModel(theTest, theTest.Id);
 
-
-            return View(editTestViewModel);
+            return View(testBeingEdited);
             
         }
         
         [HttpPost]
-        public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
+        public IActionResult UpdateTest([FromBody]EditTestViewModel editTest) //Trying to figure out how to get it to allow update and loading all the info
         {
-            Test test = context.Tests.Find(testId);
-            //find the test, replace the properties , save it to the db
+            Test test = context.Tests.Find(editTest.TestId); //find the old record
+            if (test != null)
+            {
+                test.Description = editTest.Description;
+                test.NameOfTest = editTest.NameOfTest;
+                test.UpdatedAt = DateTime.Now;
+                test.Questions = editTest.Questions;
+                //test.Options = editTest.Options; // Not in the test model, so we'll need to load it
+
+                context.Update(test);
+                context.SaveChanges();
+            }
+            
             
             return View("/Index"); 
         }
