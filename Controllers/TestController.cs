@@ -117,7 +117,7 @@ namespace TestCentral.Controllers
 
             EditTestViewModel testBeingEdited = new EditTestViewModel(theTest);
 
-            return View(testBeingEdited);
+            return View(theTest);
             
         }
         
