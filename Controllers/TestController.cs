@@ -110,6 +110,7 @@ namespace TestCentral.Controllers
         {
             Test theTest = context.Tests
                 .Include(t => t.Questions)
+                .Include(t => t.Questions.Select(q => q.Options))
                 .Single(t => t.Id == testId);
 
             //List<Question> testQuestions = theTest.Questions.ToList(); 
