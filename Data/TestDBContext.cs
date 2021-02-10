@@ -9,11 +9,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TestCentral.Data
 {
-    public class TestUserDbContext: IdentityDbContext<IdentityUser>
+    public class TestDBContext: IdentityDbContext<IdentityUser>
     {
         public new DbSet<TestUser> Users { get; set; }
 
-        public TestUserDbContext(DbContextOptions<TestUserDbContext> options)
+        public TestDBContext(DbContextOptions<TestDBContext> options)
             : base(options)
         {
         }

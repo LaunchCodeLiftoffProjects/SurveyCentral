@@ -7,7 +7,7 @@ using TestCentral.Data;
 
 namespace TestCentral.Migrations
 {
-    [DbContext(typeof(TestUserDbContext))]
+    [DbContext(typeof(TestDBContext))]
     partial class TestUserDbContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

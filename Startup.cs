@@ -25,8 +25,8 @@ namespace TestCentral
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            //    services.AddDbContext<UserDbContext>(options =>
-            //            options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
+                services.AddDbContext<TestDBContext>(options =>
+                        options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
         }
 

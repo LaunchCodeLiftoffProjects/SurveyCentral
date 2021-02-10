@@ -16,12 +16,12 @@ namespace TestCentral.Areas.Identity
         public void Configure(IWebHostBuilder builder)
         {
             builder.ConfigureServices((context, services) => {
-                services.AddDbContext<TestUserDbContext>(options =>
+                services.AddDbContext<TestDBContext>(options =>
                     options.UseMySql(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
                 services.AddDefaultIdentity<TestUser>(options => options.SignIn.RequireConfirmedAccount = false)
-                    .AddEntityFrameworkStores<TestUserDbContext>();
+                    .AddEntityFrameworkStores<TestDBContext>();
             });
         }
     }

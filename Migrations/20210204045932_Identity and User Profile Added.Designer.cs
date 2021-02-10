@@ -8,7 +8,7 @@ using TestCentral.Data;
 
 namespace TestCentral.Migrations
 {
-    [DbContext(typeof(TestUserDbContext))]
+    [DbContext(typeof(TestDBContext))]
     [Migration("20210204045932_Identity and User Profile Added")]
     partial class IdentityandUserProfileAdded
     {
