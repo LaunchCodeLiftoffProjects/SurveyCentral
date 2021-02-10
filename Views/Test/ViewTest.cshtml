@@ -1,0 +1,57 @@
+﻿@model TestCentral.Models.Test
+
+@{
+    ViewData["Title"] = "ViewTest";
+    int questionNum = 1;
+}
+
+<div>
+<h1>@Model.NameOfTest</h1>
+<br />
+<h2> Created at: @Model.CreatedAt</h2>
+<br />
+<h2> Updated at: @Model.UpdatedAt</h2>
+</div>
+<br />
+
+<br />
+<br />
+
+
+@foreach (Question question in Model.Questions)
+{
+<div>
+    <h4>Question @questionNum: @question.Prompt </h4>
+    @questionNum++
+    <br />
+</div>
+
+<div>
+    <h6>@question.Answer</h6>
+
+    <div>
+        @if (question.ImgRelatedToPrompt != null)
+        {
+            <img src="@question.ImgRelatedToPrompt" alt="Picture for question @questionNum" width="200" height="200" style="padding:30px">
+            //We could do the styling in the CSS file.
+        }
+    </div>
+
+    @if (question.Options != null)
+    {
+        foreach (Option option in question.Options)
+        {
+            //Do I need to enumerate A,B,C,D,E?
+            <h6>@option.Label</h6>
+        }
+    }
+    <br />
+</div>
+
+<div>
+    <button asp-controller="Test" asp-action="UpdateTest">Edit Test</button>
+    <!--do I need to include id? -->
+</div>
+}
+
+

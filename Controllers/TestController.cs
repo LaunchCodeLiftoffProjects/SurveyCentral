@@ -85,15 +85,15 @@ namespace TestCentral.Controllers
             return View("Add", addTestViewModel);
         }
         
-        /*
+        
         [HttpPost]
         public IActionResult ViewTest(int testId) //Not sure of the view yet, but wanted to get this in place
         {
             Test test = context.Tests.Find(testId);
 
-            return View(Index); //hasn't been fully built yet, currently built on index, could be test instead
+            return View("/Index"); //hasn't been fully built yet, currently built on index, could be test instead
         }
-        */
+        
 
         [HttpPost]
         public IActionResult Delete(int testId) // this could be an array to delete multiple tests
