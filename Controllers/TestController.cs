@@ -86,12 +86,17 @@ namespace TestCentral.Controllers
         }
         
         
-        [HttpPost]
-        public IActionResult ViewTest(int testId) //Not sure of the view yet, but wanted to get this in place
+        [HttpGet]
+        [Route("/Test/Details/{testId?}")]
+        public IActionResult Details(int testId) //Not sure of the view yet, but wanted to get this in place
         {
-            Test test = context.Tests.Find(testId);
+            Test theTest = context.Tests
+                .Include(t => t.Questions)
+                    .ThenInclude(q => q.Options)
+                .Single(t => t.Id == testId);
 
-            return View("/Index"); //hasn't been fully built yet, currently built on index, could be test instead
+
+            return View(theTest); //hasn't been fully built yet, currently built on index, could be test instead
         }
         
 
@@ -106,6 +111,7 @@ namespace TestCentral.Controllers
         }
 
         [HttpGet]
+        [Route("/Test/UpdateTest/{testId?}")]
         public IActionResult UpdateTest(int testId)
         {
             Test theTest = context.Tests
