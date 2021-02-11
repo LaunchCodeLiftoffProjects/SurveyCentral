@@ -4,9 +4,40 @@
 const qSectionId = "questionsSection";
 const addQuestionBtnId = "createTestFormAddQuestion"
 
+
 const updateDisplayNum = (qId) => {
+    // <!> Unfinished function <!>
     const displayNum = window.window.createTestPage.testQuestions.indexOf(qId);
     // Do some action to set relevant DOM element with that new number
+}
+
+const buildH3Str = text => {
+    return `<h3>${text}</h3>`
+}
+
+const buildTypeSelectStr = qId => {
+    return `<label for="type-${qId}">Type:</label>
+        <select name="Type" id="type-${qId}">
+            <option value="none" selected disabled hidden> 
+                Select an Option 
+            </option> 
+            ${buildSelectOptionStr("trueFalse", "True/False")}
+            ${buildSelectOptionStr("multipleChoice", "Multiple Choice")}
+            ${buildSelectOptionStr("textInput", "Text Input")}
+        </select>`;
+}
+
+const buildSelectOptionStr = (value, text) => {
+    return `<option value="${value}">${text}</option>`
+}
+
+const deleteQuestion = (qId) => {
+    // <!> Will need to remove event listeners from DOM elements before removing <!>
+    //$(`type-${qId}`).off();
+    //$(`btnRemove-${qId}`).off();
+    const questions = window.createTestPage.testQuestions.filter(id => id !== qId);
+    window.createTestPage.testQuestions = questions;
+    document.getElementById(`qdiv-${qId}`).innerHTML = "";
 }
 
 const addNewQuestion = () => {
@@ -14,22 +45,17 @@ const addNewQuestion = () => {
     const questions = window.createTestPage.testQuestions
     const qDisplayNum = questions.length + 1
     questions.push(qId);
-    
+
     const qNode = document.createElement("div");
-    qNode.id = `q-${qId}`;
+    qNode.id = `qdiv-${qId}`;
 
 
-    qNode.innerHTML = `<h3>Question ${qDisplayNum}</h3>
+    qNode.append
+
+    qNode.innerHTML = `${buildH3Str(qDisplayNum)} <button class="btn btn-danger" id="btnRemove-${qId}"> X </button>
     <div>
         <label for="type-${qId}">Type:</label>
-        <select name="Type" id="type-${qId}">
-            <option value="none" selected disabled hidden> 
-                Select an Option 
-            </option> 
-            <option value="trueFalse">True/False</option>
-            <option value="multipleChoice">Multiple Choice</option>
-            <option value="textInput">Text Input</option>
-        </select>
+        ${buildTypeSelectStr(qId)}
     </div><br>
     <div>
         <label for="prompt-${qId}">Prompt:</label>
@@ -43,7 +69,11 @@ const addNewQuestion = () => {
     </div>`;
 
     document.getElementById(qSectionId).appendChild(qNode);
-    document.getElementById(`type-${qId}`).addEventListener("change", ev => populate(qId), false);
+    document.getElementById(`type-${qId}`).addEventListener("change", ev => populate(qId));
+    document.getElementById(`btnRemove-${qId}`).addEventListener("click", ev => {
+        ev.preventDefault();
+        deleteQuestion(qId)
+    });
 }
 
 //Populates rest of question once user selects type from dropdown:
@@ -51,12 +81,7 @@ const addNewQuestion = () => {
 const populate = (qId) => {
     const selectedTypeElement = document.getElementById(`type-${qId}`);
     const qAnswerElement = document.getElementById(`qAnswer-${qId}`);
-    //var s1 = document.getElementById(s1);
-    //var s2 = document.getElementById(`qAnswer-${questionCounter}`);
-
     const type = selectedTypeElement.value;
-
-
 
     if (type === "trueFalse") {
         qAnswerElement.innerHTML = `<label for='trueFalse${qId}'>Correct Answer:</label>
@@ -108,6 +133,7 @@ const createTestPage = {
     createTestPageLoad,
     populate,
     addNewQuestion,
+    updateDisplayNum,
     testQuestions: []
 }
 
