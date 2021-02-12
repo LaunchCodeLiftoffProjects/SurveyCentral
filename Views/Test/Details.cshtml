@@ -15,10 +15,8 @@
     <h2> Updated at: @Model.UpdatedAt</h2>
 </div>
 <br />
-
 <br />
 <br />
-
 
 @foreach (Question question in Model.Questions)
 {
@@ -53,21 +51,22 @@
 
                 m++;
             }
-            
-            
+
+
         }
         
         <br />
     </div>
-    
-    
-}
+
+
+            }
 <br />
 <br />
 <br />
 <div>
-    <button  asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">Edit Test</button>
- 
+    <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">Edit Test</a>
+    
+
     <!--future button to go to the edit form-->
 </div>
 
