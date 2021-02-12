@@ -80,7 +80,7 @@ namespace TestCentral.Controllers
                 }
 
                 context.SaveChanges();
-                return Redirect("/Test");
+                return Redirect("/Test/Details/" + newTest.Id);
             }
             return View("Add", addTestViewModel);
         }
