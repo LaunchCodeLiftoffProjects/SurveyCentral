@@ -25,9 +25,10 @@ namespace TestCentral
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-                services.AddDbContext<TestDBContext>(options =>
-                        options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRazorPages();
+            //Create connection to DB using the DefaultConnection added in appsettings.json
+            services.AddDbContext<TestDBContext>(options =>
+                options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

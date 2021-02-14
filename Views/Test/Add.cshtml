@@ -1,0 +1,24 @@
+﻿@model TestCentral.ViewModels.AddTestViewModel
+
+
+<h1>Create New Test</h1>
+<form>
+    <div class="form-group">
+        <label for="testName">Test Name:</label>
+        <input name="name" type="text" id="testName"/>
+        <span asp-validation-for="NameOfTest"></span>
+    </div>
+    <div class="form-group">
+        <label for="testDescription">Test Description:</label>
+        <input type="text" id="testDescription" name="description" />
+        <span asp-validation-for="Description"></span>
+    </div>
+    <h2>Questions</h2>
+    <div id="questionsSection">
+    </div>
+    <div>
+        <button class="btn btn-primary" id="createTestFormAddQuestion">Add a Question</button><br>
+        <button id="submit">Finish and Save Test</button><br>
+        <button id="discard">Discard Test</button>
+    </div>
+</form>
