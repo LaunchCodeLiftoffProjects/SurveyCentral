@@ -1,0 +1,46 @@
+﻿@model TestCentral.ViewModels.EditProfileViewModel
+
+<h1>Edit Profile</h1>
+<form autocomplete="off" asp-controller="Profile" asp-action="SubmitEditProfileForm" method="post">
+
+    <div class="form-group">
+        <label>First Name</label>
+        <input class="form-control" type="text" name="FirstName" />
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label>Last Name</label>
+        <input class="form-control" type="text" name="LastName" />
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label>School Name</label>
+        <input class="form-control" type="text" name="SchoolName" />
+        <br />
+    </div>
+
+    <div class="form-group">
+        <label>Emoji</label>
+        <select class="form-control" name="Emoji">
+            <option value="&#128512">&#128512</option>
+            <option value="&#128513">&#128513</option>
+            <option value="&#128523">&#128523</option>
+            <option value="&#128526">&#128526</option>
+            <option value="&#127752">&#127752</option>
+            <option value="&#127891">&#127891</option>
+            <option value="&#11088">&#11088</option>
+            <option value="&#128125">&#128125</option>
+            <option value="&#129409">&#129409</option>
+            <option value="&#128038">&#128038</option>
+            <option value="&#128062">&#128062</option>
+            <option value="&#128640">&#128640</option>
+            <option value="&#129505">&#129505</option>
+        </select>
+        <br />
+    </div>
+
+    <input type="submit" value="Submit Changes" />
+
+</form>

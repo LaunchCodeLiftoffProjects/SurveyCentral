@@ -25,6 +25,7 @@ namespace TestCentral
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddRazorPages();
             //Create connection to DB using the DefaultConnection added in appsettings.json
             services.AddDbContext<TestDBContext>(options =>
                 options.UseMySql(Configuration.GetConnectionString("DefaultConnection")));
@@ -45,6 +46,8 @@ namespace TestCentral
 
             app.UseRouting();
 
+            app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
@@ -52,6 +55,7 @@ namespace TestCentral
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller=Home}/{action=Index}/{id?}");
+                endpoints.MapRazorPages();
             });
         }
     }
