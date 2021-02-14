@@ -100,14 +100,14 @@ namespace TestCentral.Controllers
         }
         
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Delete(int testId) // this could be an array to delete multiple tests
         {
             Test theTest = context.Tests.Find(testId);
             context.Tests.Remove(theTest);
             context.SaveChanges();
 
-            return Redirect("/Index");
+            return Redirect("/Test");
         }
 
         [HttpGet]
