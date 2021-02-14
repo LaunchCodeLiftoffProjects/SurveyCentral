@@ -2,6 +2,9 @@
 
 @{
     ViewData["Title"] = "UpdateTest";
+    int questionNumber = 1;
+    string[] multipleChoice = { "A", "B", "C", "D", "E" };
+    int m = 0;
 }
 
 <h1>Edit Test</h1>
@@ -31,7 +34,8 @@
             @foreach (Question question in Model.Questions)
             {
                 <div class="form-group">
-                    <h6>Question:</h6>
+                    <h6>Question: @questionNumber</h6>
+                    @{questionNumber++;}
                     <label asp-for="@question.Prompt" class="control-label"></label>
                     <input asp-for="@question.Prompt" class="form-control" />
                     <span asp-validation-for="@question.Prompt" class="text-danger"></span>
@@ -41,9 +45,11 @@
 
                     @if (question.Options != null)
                     {
+                        m = 0;
                         @foreach (Option option in question.Options)
                         {
-                            <label asp-for="@option.Label" class="control-label">Answer Option</label>
+                            <label asp-for="@option.Label" class="control-label">Option @multipleChoice[m]</label>
+                                    m++;
                             <input asp-for="@option.Label" class="form-control" />
                         }
                     }
