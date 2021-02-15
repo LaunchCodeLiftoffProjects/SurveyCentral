@@ -7,20 +7,28 @@
     int m = 0;
 } 
 <script>
-    document.getElementsByClassName("answers").addEventListener("click", hideAnswers);
-    function hideAnswers() {
-        document.getElementsByClassName("answers").style.visibility ="hidden";
+    function printableTest() {
+        document.getElementById("testDates").remove();
+        document.getElementById("name").innerHTML = "Name: ________________________________________";
+        let answers = document.getElementsByClassName("answers");
+        for (let i = 0; i <@Model.Questions.Count; i++) {
+            answers[i].classList.add('hiddenForPrinting');
+        }
     }
 </script>
 
 <div>
     <h1>@Model.NameOfTest</h1>
     <br />
-    <h2> Created at: @Model.CreatedAt</h2>
-    <br />
-    <h2> Updated at: @Model.UpdatedAt</h2>
+    <div id="testDates">
+        <h4> Created at: @Model.CreatedAt</h4>
+        <br />
+        <h4> Updated at: @Model.UpdatedAt</h4>
+    </div>
+    <div>
+        <h4 id="name"></h4>
+    </div>
 </div>
-<br />
 <br />
 <br />
 
@@ -33,10 +41,6 @@
     </div>
 
     <div>
-        <div class="answers" id='answers'>
-            <h6> Correct Answer: @question.Answer</h6>
-        </div>
-        
 
         <div>
             @if (question.ImgRelatedToPrompt != null)
@@ -63,21 +67,26 @@
 
 
         }
-        
+
+        <div class="answers">
+            <h6> Correct Answer: @question.Answer</h6>
+        </div>
+
         <br />
     </div>
-
-
-            }
+     }
 <br />
 <br />
 <br />
 <div>
-    <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">Edit Test</a>
-
-    <button onclick="hideAnswers()">Hide Answers</button>
-    <!--future button to go to the edit form-->
+    <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">
+        <input class="btn btn-primary" type="button" value="Edit Test">
+    </a>
     
+
+    <button onclick="printableTest()" class="btn btn-secondary">Printable Test</button>
+    <!--future button to go to the edit form-->
+
 </div>
 
 
