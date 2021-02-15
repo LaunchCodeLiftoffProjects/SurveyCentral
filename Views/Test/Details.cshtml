@@ -1,11 +1,17 @@
 ﻿@model TestCentral.Models.Test
-
+    <link href="~/css/site.css" rel="stylesheet" />
 @{
     ViewData["Title"] = "Details";
     int questionNum = 1;
     string[] multipleChoice = { "A", "B", "C", "D", "E", "F" };
     int m = 0;
-}
+} 
+<script>
+    document.getElementsByClassName("answers").addEventListener("click", hideAnswers);
+    function hideAnswers() {
+        document.getElementsByClassName("answers").style.visibility ="hidden";
+    }
+</script>
 
 <div>
     <h1>@Model.NameOfTest</h1>
@@ -27,7 +33,10 @@
     </div>
 
     <div>
-        <h6> Correct Answer: @question.Answer</h6>
+        <div class="answers" id='answers'>
+            <h6> Correct Answer: @question.Answer</h6>
+        </div>
+        
 
         <div>
             @if (question.ImgRelatedToPrompt != null)
@@ -65,9 +74,10 @@
 <br />
 <div>
     <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">Edit Test</a>
-    
 
+    <button onclick="hideAnswers()">Hide Answers</button>
     <!--future button to go to the edit form-->
+    
 </div>
 
 
