@@ -3,13 +3,15 @@
 let questionCounter = 0;
 
 function addNewQuestion() {
+    //change innerHTML of element with id questionType_Menu to <p> with selected type
+
     questionCounter++;
 
     let addQuestionNode = document.createElement("div");
     addQuestionNode.id = `q${questionCounter}`;
 
     addQuestionNode.innerHTML = `<h3>Question ${questionCounter}</h3>
-    <div>
+    <div id="questionType${questionCounter}Menu">
         <label for="questionType${questionCounter}">Type:</label>
         <select name="questionType${questionCounter}" id="questionType${questionCounter}" onchange="populate(this.id)">
             <option value="${questionCounter}">Select One</option>
