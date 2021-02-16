@@ -6,10 +6,12 @@
     <div class="form-group">
         <label for="testName">Test Name:</label>
         <input name="name" type="text" id="testName"/>
+        <span asp-validation-for="NameOfTest"></span>
     </div>
     <div class="form-group">
         <label for="testDescription">Test Description:</label>
         <input type="text" id="testDescription" name="description" />
+        <span asp-validation-for="Description"></span>
     </div>
     <h2>Questions</h2>
     <div id="questionsSection">

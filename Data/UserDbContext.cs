@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -9,14 +9,11 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TestCentral.Data
 {
-    public class TestDBContext: IdentityDbContext<IdentityUser>
+    public class UserDbContext: IdentityDbContext<IdentityUser>
     {
-        public new DbSet<TestUser> Users { get; set; }
-        public DbSet<Test> Tests { get; set; }
-        public DbSet<Question> Questions { get; set; }
-        public DbSet<Option> Options { get; set; }
+        public new DbSet<User> Users { get; set; }
 
-        public TestDBContext(DbContextOptions<TestDBContext> options)
+        public UserDbContext(DbContextOptions<UserDbContext> options)
             : base(options)
         {
         }
