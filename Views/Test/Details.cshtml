@@ -82,7 +82,8 @@
     <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">
         <input class="btn btn-primary" type="button" value="Edit Test">
     </a>
-    
+
+    <asp:Button class="btn-warning" testId="@Model.Id" runat="server" Text="Edit Test" OnClick="EditTest" />
 
     <button onclick="printableTest()" class="btn btn-secondary">Printable Test</button>
     <!--future button to go to the edit form-->
