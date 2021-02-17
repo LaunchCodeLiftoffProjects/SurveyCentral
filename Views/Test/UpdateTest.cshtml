@@ -28,37 +28,36 @@
                     <input asp-for="Description" class="form-control" />
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
-                <div class="form-group">
-                    <label asp-for="Status" class="control-label"></label>
-                    <input asp-for="Status" class="form-control" />
-                    <span asp-validation-for="Status" class="text-danger"></span>
-                </div>
-                @foreach (Question question in Model.Questions)
+                @for (int i = 0; i < Model.Questions.Count(); i++)
                 {
                     <div class="form-group">
                         <h6>Question: @questionNumber</h6>
                         @{questionNumber++;}
-                        <label asp-for="@question.Prompt" class="control-label"></label>
-                        <input asp-for="@question.Prompt" class="form-control" />
-                        <span asp-validation-for="@question.Prompt" class="text-danger"></span>
-                        <label asp-for="@question.Answer" class="control-label"></label>
-                        <input asp-for="@question.Answer" class="form-control" />
-                        <span asp-validation-for="@question.Answer" class="text-danger"></span>
+                        <label asp-for="@Model.Questions[i].Prompt" class="control-label"></label>
+                        <input asp-for="@Model.Questions[i].Prompt" class="form-control"/>
+                        <span asp-validation-for="@Model.Questions[i].Prompt" class="text-danger"></span>
+                        <label asp-for="@Model.Questions[i].Answer" class="control-label"></label>
+                        <input asp-for="@Model.Questions[i].Answer" class="form-control" />
+                        <span asp-validation-for="@Model.Questions[i].Answer" class="text-danger"></span>
 
-                        @if (question.Options != null)
+                        @{Question currentQuestion = Model.Questions[i]; }
+
+                        @if (currentQuestion.Options != null)
                         {
                             m = 0;
-                            @foreach (Option option in question.Options)
+                            int optionCount = currentQuestion.Options.Count();
+                            
+                            @for(int k = 0; k < optionCount; k++)
                             {
-                                <label asp-for="@option.Label" class="control-label">Option @multipleChoice[m]</label>
+                                <label asp-for="@Model.Questions[i].Options[k].Label" class="control-label">Option @multipleChoice[m]</label>
                                 m++;
-                                <input asp-for="@option.Label" class="form-control" />
+                                <input asp-for="@Model.Questions[i].Options[k].Label" class="form-control" />
                             }
                         }
                     </div>
                 }
                 <div class="form-group">
-                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="submit" value="Save" class="btn btn-primary" asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id"/>
                 </div>
             </form>
         </div>

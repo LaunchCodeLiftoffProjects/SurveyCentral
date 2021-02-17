@@ -124,11 +124,18 @@ namespace TestCentral.Controllers
         }
         
         [HttpPost]
-        public IActionResult UpdateTest([FromBody]EditTestViewModel editTest) //Trying to figure out how to get it to allow update and loading all the info
+        [Route("/Test/UpdateTest/{testId}")]
+        public IActionResult UpdateTest(EditTestViewModel editTest, int testId, List<Question> questions, List<Option> options) //Trying to figure out how to get it to allow update and loading all the info
         {
-            Test test = context.Tests.Find(editTest.TestId); //find the old record
+            Test test = context.Tests
+                .Include(t => t.Questions)
+                .ThenInclude(q => q.Options)
+                .Single(t => t.Id == testId);
 
-            
+            if (test == null)
+            {
+                return NotFound();
+            }
             if (ModelState.IsValid)
             {
                 test.Description = editTest.Description;
