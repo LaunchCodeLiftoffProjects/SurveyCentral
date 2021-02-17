@@ -5,6 +5,30 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Views\Profile\**" />
+    <Compile Remove="Views\TestUser\**" />
+    <Compile Remove="Views\User\**" />
+    <Content Remove="Views\Profile\**" />
+    <Content Remove="Views\TestUser\**" />
+    <Content Remove="Views\User\**" />
+    <EmbeddedResource Remove="Views\Profile\**" />
+    <EmbeddedResource Remove="Views\TestUser\**" />
+    <EmbeddedResource Remove="Views\User\**" />
+    <None Remove="Views\Profile\**" />
+    <None Remove="Views\TestUser\**" />
+    <None Remove="Views\User\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="Controllers\TestUserController.cs" />
+    <Compile Remove="Controllers\UserController.cs" />
+    <Compile Remove="Data\UserDbContext.cs" />
+    <Compile Remove="Models\TestSignInManager.cs" />
+    <Compile Remove="Models\User.cs" />
+    <Compile Remove="ViewModels\AddUserViewModel.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="3.1.10" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="3.1.10">
@@ -13,8 +37,13 @@
     </PackageReference>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Relational" Version="3.1.10" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.10" />
-    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.0" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="3.1.4" />
     <PackageReference Include="Pomelo.EntityFrameworkCore.MySql" Version="3.1.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Areas\Identity\Data\" />
+    <Folder Include="ViewModels\" />
   </ItemGroup>
 
 </Project>

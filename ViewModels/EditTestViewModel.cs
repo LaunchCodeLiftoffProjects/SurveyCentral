@@ -7,33 +7,33 @@ using TestCentral.Models;
 
 namespace TestCentral.ViewModels
 {
-    public class AddTestViewModel
+    public class EditTestViewModel
     {
-        //[Required]
+        public int TestId { get; set; }
         [Required(ErrorMessage = "Test name is required.")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Test name must be between 3 and 50 characters")]
         public string NameOfTest { get; set; }
-        //[Required]
         [Required(ErrorMessage = "Description is required")]
         [StringLength(500, ErrorMessage = "Description too long!")]
         public string Description { get; set; }
 
-        public DateTime CreatedAt { get; set; }
-
-        public DateTime UpdatedAt { get; set; }
 
         // I think we need to store the Id for the Prompt and Answers
         public List<Question> Questions { get; set; }
         public List<Option> Options { get; set; }
-        
 
 
-        public AddTestViewModel(List<Question> questions, List<Option> options) 
+
+        public EditTestViewModel(Test theTest) //need to get the options and questions loaded too
         {
-            Questions = questions;
-            Options = options;
+            //This hopefully will autoload the info when someone clicks to edit the test.
+            NameOfTest = theTest.NameOfTest;
+            Description = theTest.Description;
+            Questions = theTest.Questions.ToList();
+
+            //How do I grab the options with the questions?
         }
 
-        public AddTestViewModel() { }
+        public EditTestViewModel() { }
     }
 }
