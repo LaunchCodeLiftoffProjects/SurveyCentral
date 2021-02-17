@@ -1,93 +1,80 @@
 ﻿@model TestCentral.Models.Test
-    <link href="~/css/site.css" rel="stylesheet" />
+<link href="~/css/site.css" rel="stylesheet" />
+
 @{
     ViewData["Title"] = "Details";
     int questionNum = 1;
     string[] multipleChoice = { "A", "B", "C", "D", "E", "F" };
     int m = 0;
-} 
-<script>
-    function printableTest() {
-        document.getElementById("testDates").remove();
-        document.getElementById("name").innerHTML = "Name: ________________________________________";
-        let answers = document.getElementsByClassName("answers");
-        for (let i = 0; i <@Model.Questions.Count; i++) {
-            answers[i].classList.add('hiddenForPrinting');
-        }
-    }
-</script>
+}
 
-<div>
-    <h1>@Model.NameOfTest</h1>
-    <br />
-    <div id="testDates">
-        <h4> Created at: @Model.CreatedAt</h4>
+
+    <div>
+        <h1>@Model.NameOfTest</h1>
         <br />
-        <h4> Updated at: @Model.UpdatedAt</h4>
-    </div>
-    <div>
-        <h4 id="name"></h4>
-    </div>
-</div>
-<br />
-<br />
-
-@foreach (Question question in Model.Questions)
-{
-    <div>
-        <h4>Question @questionNum: @question.Prompt </h4>
-        @{questionNum++;}
-        <br />
-    </div>
-
-    <div>
-
+        <div id="testDates">
+            <h4> Created at: @Model.CreatedAt</h4>
+            <br />
+            <h4> Updated at: @Model.UpdatedAt</h4>
+        </div>
         <div>
-            @if (question.ImgRelatedToPrompt != null)
-            {
-                <img src="@question.ImgRelatedToPrompt" alt="Picture for question @questionNum" width="200" height="200" style="padding:30px; border-radius: 50%;">
-                //We could do the styling in the CSS file.
-            }
+            <h4 id="name"></h4>
         </div>
-
-        @if (question.Options != null)
-        {
-            m = 0;
-            foreach (Option option in question.Options)
-            {
-                //Do I need to enumerate A,B,C,D,E?
-
-
-
-
-                <h6>@multipleChoice[m] : @option.Label</h6>
-
-                m++;
-            }
-
-
-        }
-
-        <div class="answers">
-            <h6> Correct Answer: @question.Answer</h6>
-        </div>
-
-        <br />
     </div>
-     }
-<br />
-<br />
-<br />
-<div>
-    <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">
-        <input class="btn btn-primary" type="button" value="Edit Test">
-    </a>
+    <br />
+    <br />
+    <body>
+        @foreach (Question question in Model.Questions)
+        {
+            <div>
+                <h4>Question @questionNum: @question.Prompt </h4>
+                @{questionNum++;}
+                <br />
+            </div>
 
-    <asp:Button class="btn-warning" testId="@Model.Id" runat="server" Text="Edit Test" OnClick="EditTest" />
+            <div>
 
-    <button onclick="printableTest()" class="btn btn-secondary">Printable Test</button>
-    <!--future button to go to the edit form-->
+                <div>
+                    @if (question.ImgRelatedToPrompt != null)
+                    {
+                        <img class="imgRelatedToPrompts" src="@question.ImgRelatedToPrompt" alt="Picture for question @questionNum">
+                    }
+                </div>
 
-</div>
+                @if (question.Options != null)
+                {
+                    m = 0;
+                    foreach (Option option in question.Options)
+                    {
+                        //Do I need to enumerate A,B,C,D,E?
 
+                        <h6>@multipleChoice[m] : @option.Label</h6>
+
+                        m++;
+                    }
+
+
+                }
+
+                <div class="answers">
+                    <h6> Correct Answer: @question.Answer</h6>
+                </div>
+
+                <br />
+            </div>
+        }
+        <br />
+        <br />
+        <br />
+        <div>
+            <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">
+                <input class="btn btn-primary" type="button" value="Edit Test">
+            </a>
+
+            <button id="printBtn" class="btn btn-secondary" onclick="printableTest(@Model.Questions.Count)">Printable Test</button>
+            <!--future button to go to the edit form-->
+
+        </div>
+    </body>
+<script src="~/js/util.js"></script>
 

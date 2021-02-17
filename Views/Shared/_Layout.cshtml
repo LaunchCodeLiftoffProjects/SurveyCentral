@@ -1,43 +1,43 @@
- <!DOCTYPE html>
+﻿<!DOCTYPE html>
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<TestUser> SignInManager
 @inject UserManager<TestUser> UserManager
 
-    <style>
-        .sidebar {
-            margin: 0;
-            padding: 0;
-            width: 200px;
-            background-color: #f1f1f1;
-            position: fixed;
-            height: 100%;
-            overflow: auto;
+<style>
+    .sidebar {
+        margin: 0;
+        padding: 0;
+        width: 200px;
+        background-color: #f1f1f1;
+        position: fixed;
+        height: 100%;
+        overflow: auto;
+    }
+
+        .sidebar a {
+            display: block;
+            color: black;
+            padding: 16px;
+            text-decoration: none;
         }
 
-            .sidebar a {
-                display: block;
-                color: black;
-                padding: 16px;
-                text-decoration: none;
+            .sidebar a.active {
+                background-color: #467fd0;
+                color: white;
             }
 
-                .sidebar a.active {
-                    background-color: #467fd0;
-                    color: white;
-                }
+            .sidebar a:hover:not(.active) {
+                background-color: #555;
+                color: white;
+            }
 
-                .sidebar a:hover:not(.active) {
-                    background-color: #555;
-                    color: white;
-                }
-
-        div.content {
-            margin-left: 200px;
-            padding: 1px 16px;
-            height: 1000px;
-        }
-    </style>
+    div.content {
+        margin-left: 200px;
+        padding: 1px 16px;
+        height: 1000px;
+    }
+</style>
 
 <html lang="en">
 <head>
@@ -68,15 +68,15 @@
                     <ul class="navbar-nav flex-grow-1">
                         @if (SignInManager.IsSignedIn(User))
                         {
-                            
+
                             <li class="nav-item">
-                              <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             </li>
                             <li class="nav-item">
-                              <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
                             </li>
                             <li class="nav-item">
                                 <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
@@ -103,44 +103,45 @@
     </header>
     @if (SignInManager.IsSignedIn(User))
     {
-<div class="row">
-    <div class="sidebar">
-        <li class="active">
-            <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
-            <ul class="collapse list-unstyled" id="homeSubmenu">
-                <li>
-                    <a href="#">Home 1</a>
+        <div class="row">
+            <div class="sidebar">
+                <li class="active">
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                    <ul class="collapse list-unstyled" id="homeSubmenu">
+                        <li>
+                            <a href="#">Home 1</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 2</a>
+                        </li>
+                        <li>
+                            <a href="#">Home 3</a>
+                        </li>
+                    </ul>
                 </li>
-                <li>
-                    <a href="#">Home 2</a>
-                </li>
-                <li>
-                    <a href="#">Home 3</a>
-                </li>
-            </ul>
-        </li>
-    </div>
-</div>
-    <div class="container">
-        <main role="main" class="col-9" style="text-align: justify;">
-            @RenderBody()
-        </main>
-    </div>
-    } else { 
-
-    <div class="container">
-        <main role="main" class="col-9" style="text-align: justify;">
-            @RenderBody()
-        </main>
-    </div>
-    }
-
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TestCentral - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
         </div>
-    </footer>
-    @RenderSection("Scripts", required: false)
+        <div class="container">
+            <main role="main" class="col-9" style="text-align: justify;">
+                @RenderBody()
+            </main>
+        </div>
+    }
+    else
+    {
+
+        <div class="container">
+            <main role="main" class="col-9" style="text-align: justify;">
+                @RenderBody()
+            </main>
+        </div>
+    }
+    
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - TestCentral - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            </div>
+        </footer>
+        @RenderSection("Scripts", required: false)
 </body>
 </html>

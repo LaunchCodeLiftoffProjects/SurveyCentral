@@ -13,3 +13,13 @@ const utilFunctions = {
 }
 
 window.utilFunctions = utilFunctions;
+
+// Erases correct answers, and formats test details for printing or displaying in the Test Details page
+function printableTest(questionsCount) {
+    document.getElementById("testDates").remove();
+    document.getElementById("name").innerHTML = "Name: ________________________________________";
+    let answers = document.getElementsByClassName("answers");
+    for (let i = 0; i < questionsCount; i++) {
+        answers[i].classList.add('hiddenForPrinting');
+    }
+}
