@@ -125,7 +125,7 @@ namespace TestCentral.Controllers
         
         [HttpPost]
         [Route("/Test/UpdateTest/{testId}")]
-        public IActionResult UpdateTest(EditTestViewModel editTest, int testId, List<Question> questions, List<Option> options) //Trying to figure out how to get it to allow update and loading all the info
+        public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
         {
             Test test = context.Tests
                 .Include(t => t.Questions)
