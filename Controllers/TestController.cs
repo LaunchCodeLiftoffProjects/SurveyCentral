@@ -141,11 +141,21 @@ namespace TestCentral.Controllers
                 test.Description = editTest.Description;
                 test.NameOfTest = editTest.NameOfTest;
                 test.UpdatedAt = DateTime.Now;
-                test.Questions = editTest.Questions;
-                //test.Options = editTest.Options; // Not in the test model, so we'll need to load it
+                //test.Questions = editTest.Questions;
 
-                context.Update(test);
-                //context.SaveChanges();
+                foreach (Question question in editTest.Questions)
+                {
+                    Question existingQuestion = context.Questions.SingleOrDefault(q => q.Id == question.Id);
+
+                    existingQuestion.Prompt = question.Prompt;
+                    existingQuestion.Type = question.Type;
+                    existingQuestion.ImgRelatedToPrompt = question.ImgRelatedToPrompt;
+                }
+
+
+                //context.Update(test);
+                context.SaveChanges();
+                return Redirect("/Test/Details/" + test.Id);
             }
 
             
