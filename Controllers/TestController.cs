@@ -136,12 +136,12 @@ namespace TestCentral.Controllers
             {
                 return NotFound();
             }
+            
             if (ModelState.IsValid)
             {
                 test.Description = editTest.Description;
                 test.NameOfTest = editTest.NameOfTest;
                 test.UpdatedAt = DateTime.Now;
-                //test.Questions = editTest.Questions;
 
                 foreach (Question question in editTest.Questions)
                 {
@@ -150,10 +150,21 @@ namespace TestCentral.Controllers
                     existingQuestion.Prompt = question.Prompt;
                     existingQuestion.Type = question.Type;
                     existingQuestion.ImgRelatedToPrompt = question.ImgRelatedToPrompt;
+                    existingQuestion.Answer = question.Answer;
+
+                    if(question.Options != null)
+                    {
+                        foreach(Option option in question.Options)
+                        {
+                            Option existingOption = context.Options.SingleOrDefault(o => o.Id == option.Id);
+
+                            existingOption.Value = option.Value;
+                            existingOption.Label = option.Label;
+                        }
+                    }
                 }
 
 
-                //context.Update(test);
                 context.SaveChanges();
                 return Redirect("/Test/Details/" + test.Id);
             }
