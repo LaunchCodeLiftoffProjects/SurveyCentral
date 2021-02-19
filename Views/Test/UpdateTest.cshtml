@@ -40,6 +40,9 @@
                         <label asp-for="@Model.Questions[i].Answer" class="control-label"></label>
                         <input asp-for="@Model.Questions[i].Answer" class="form-control" />
                         <span asp-validation-for="@Model.Questions[i].Answer" class="text-danger"></span>
+                        <label asp-for="@Model.Questions[i].ImgRelatedToPrompt" class="control-label">Question Image Link</label>
+                        <input asp-for="@Model.Questions[i].ImgRelatedToPrompt" class="form-control" />
+                        <span asp-validation-for="@Model.Questions[i].ImgRelatedToPrompt" class="text-danger"></span>
 
                         @{Question currentQuestion = Model.Questions[i]; }
 
