@@ -31,8 +31,8 @@
                 @for (int i = 0; i < Model.Questions.Count(); i++)
                 {
                     <input type="hidden" asp-for="@Model.Questions[i].Id"/>
-                    <div class="form-group">
-                        <h6>Question: @questionNumber</h6>
+                    <div class="form-group" id="qform-@Model.Questions[i].Id">
+                        <h6>Question: @questionNumber</h6> 
                         @{questionNumber++;}
                         <label asp-for="@Model.Questions[i].Prompt" class="control-label"></label>
                         <input asp-for="@Model.Questions[i].Prompt" class="form-control"/>
@@ -59,6 +59,8 @@
                                 <input asp-for="@Model.Questions[i].Options[k].Label" class="form-control" />
                             }
                         }
+
+                    <button class="btn btn-danger" onclick="deleteQuestion(@Model.Questions[i].Id)">Delete Question</button>
                     </div>
                 }
                 <div class="form-group">

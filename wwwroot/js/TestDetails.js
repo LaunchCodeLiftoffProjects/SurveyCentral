@@ -21,3 +21,13 @@ function printableTest(questionsCount) {
     }
 }
 
+
+function deleteQuestion(questionId) {
+    fetch()
+        .then(response => {
+            // do whatever we need if it succeeded
+        })
+        .catch(error => {
+            // Do something with error
+        });
+}
