@@ -21,20 +21,24 @@ function printableTest(questionsCount) {
     }
 }
 
-
+//Delete a question while editing a test
 function postDeleteQuestion(questionId) {
-    window.alert("Are you sure you want to delete this question?");
-    fetch('http://localhost:63752/Question/DeleteQuestion/' + questionId,
-        {
-            method: 'POST'
-        }).then(response => {
-            console.log(response);
-            let questionHTML = document.getElementById(`qform-${questionId}`);
-            questionHTML.innerHTML = "";
-            location.reload();
+    if (window.confirm("Are you sure you want to delete this question?")) {
+        ;
+        fetch('http://localhost:63752/Question/DeleteQuestion/' + questionId,
+            {
+                method: 'POST'
+            }).then(response => {
+                console.log(response);
+                let questionHTML = document.getElementById(`qform-${questionId}`);
+                questionHTML.innerHTML = "";
+                location.reload();
 
-        })
-        .catch(error => {
-            console.error('There has been an issue');
-        });
+            })
+            .catch(error => {
+                console.error('There has been an issue');
+            });
+
+    }
+    return;
 }
