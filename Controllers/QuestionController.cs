@@ -54,5 +54,15 @@ namespace TestCentral.Controllers
             return View("Add", addQuestionViewModel);
 
         }
+
+        [HttpPost]
+        public ActionResult DeleteQuestion([FromBody] int questionId)
+        {
+            Question theQuestion = context.Questions.Find(questionId);
+            context.Questions.Remove(theQuestion);
+            context.SaveChanges();
+
+            return Ok();
+        }
     }
 }

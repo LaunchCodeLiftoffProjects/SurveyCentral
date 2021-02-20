@@ -22,12 +22,18 @@ function printableTest(questionsCount) {
 }
 
 
-function deleteQuestion(questionId) {
-    fetch()
-        .then(response => {
-            // do whatever we need if it succeeded
+function postDeleteQuestion(questionId) {
+    window.alert("Are you sure you want to delete this question?");
+    fetch('http://localhost:63752/Question/DeleteQuestion/',
+        {
+            method: 'POST',
+            body: JSON.stringify(questionId)
+        }).then(response => {
+            console.log(response);
+            let questionHTML = document.getElementById(`qform-${questionId}`);
+            questionHTML.innerHTML = "";
         })
         .catch(error => {
-            // Do something with error
+            console.error('There has been an issue');
         });
 }
