@@ -56,7 +56,8 @@ namespace TestCentral.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteQuestion([FromBody] int questionId)
+        [Route("/Question/DeleteQuestion/{questionId}")]
+        public ActionResult DeleteQuestion(int questionId)
         {
             Question theQuestion = context.Questions.Find(questionId);
             context.Questions.Remove(theQuestion);
