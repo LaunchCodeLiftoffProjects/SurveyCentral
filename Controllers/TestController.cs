@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace TestCentral.Controllers
         {
             context = dbContext;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             List<Test> tests = context.Tests.ToList();

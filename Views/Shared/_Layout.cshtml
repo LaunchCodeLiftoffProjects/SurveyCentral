@@ -7,6 +7,7 @@
 <style>
     .sidebar {
         margin: 0;
+        padding-left: 10px;
         width: 10%;
         height: 100%;
         background-color: #f1f1f1;
@@ -72,7 +73,7 @@
                         {
 
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
@@ -107,8 +108,8 @@
     {
         <div class="row">
             <div class="sidebar">
-                <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Home</a>
+                
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Menu</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu">
                         <li>
                             <a href="#">Home 1</a>
@@ -120,7 +121,7 @@
                             <a href="#">Home 3</a>
                         </li>
                     </ul>
-                </li>
+                
             </div>
         </div>
         <div class="container">
