@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,7 +18,7 @@ namespace TestCentral.Controllers
         {
             context = dbContext;
         }
-
+        [Authorize]
         public IActionResult Index()
         {
             List<Test> tests = context.Tests.ToList();
@@ -100,14 +101,14 @@ namespace TestCentral.Controllers
         }
         
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult Delete(int testId) // this could be an array to delete multiple tests
         {
             Test theTest = context.Tests.Find(testId);
             context.Tests.Remove(theTest);
             context.SaveChanges();
 
-            return Redirect("/Index");
+            return Redirect("/Test");
         }
 
         [HttpGet]
@@ -124,21 +125,49 @@ namespace TestCentral.Controllers
         }
         
         [HttpPost]
-        public IActionResult UpdateTest([FromBody]EditTestViewModel editTest) //Trying to figure out how to get it to allow update and loading all the info
+        [Route("/Test/UpdateTest/{testId}")]
+        public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
         {
-            Test test = context.Tests.Find(editTest.TestId); //find the old record
+            Test test = context.Tests
+                .Include(t => t.Questions)
+                .ThenInclude(q => q.Options)
+                .Single(t => t.Id == testId);
 
+            if (test == null)
+            {
+                return NotFound();
+            }
             
             if (ModelState.IsValid)
             {
                 test.Description = editTest.Description;
                 test.NameOfTest = editTest.NameOfTest;
                 test.UpdatedAt = DateTime.Now;
-                test.Questions = editTest.Questions;
-                //test.Options = editTest.Options; // Not in the test model, so we'll need to load it
 
-                context.Update(test);
-                //context.SaveChanges();
+                foreach (Question question in editTest.Questions)
+                {
+                    Question existingQuestion = context.Questions.SingleOrDefault(q => q.Id == question.Id);
+
+                    existingQuestion.Prompt = question.Prompt;
+                    existingQuestion.Type = question.Type;
+                    existingQuestion.ImgRelatedToPrompt = question.ImgRelatedToPrompt;
+                    existingQuestion.Answer = question.Answer;
+
+                    if(question.Options != null)
+                    {
+                        foreach(Option option in question.Options)
+                        {
+                            Option existingOption = context.Options.SingleOrDefault(o => o.Id == option.Id);
+
+                            existingOption.Value = option.Value;
+                            existingOption.Label = option.Label;
+                        }
+                    }
+                }
+
+
+                context.SaveChanges();
+                return Redirect("/Test/Details/" + test.Id);
             }
 
             

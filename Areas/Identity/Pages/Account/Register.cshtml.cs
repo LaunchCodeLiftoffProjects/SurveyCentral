@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -81,8 +81,9 @@ namespace TestCentral.Areas.Identity.Pages.Account
 
 
             [DataType(DataType.Text)]
-            [Display(Name = "Emoji (Windows Key + . or CTRL + CMD + Space)")]
+            [Display(Name = "Emoji‍")]
             [StringLength(30, ErrorMessage = "The {0} must be max {1} characters long.")]
+
             public string Emoji { get; set; }
 
         }

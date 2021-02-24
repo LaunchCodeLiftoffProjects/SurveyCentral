@@ -1,4 +1,6 @@
 ﻿@model TestCentral.Models.Test
+<link href="~/css/site.css" rel="stylesheet" />
+<script src="~/js/testDetails.js"></script>
 
 @{
     ViewData["Title"] = "Details";
@@ -6,68 +8,94 @@
     string[] multipleChoice = { "A", "B", "C", "D", "E", "F" };
     int m = 0;
 }
-
-<div>
-    <h1>@Model.NameOfTest</h1>
-    <br />
-    <h2> Created at: @Model.CreatedAt</h2>
-    <br />
-    <h2> Updated at: @Model.UpdatedAt</h2>
-</div>
-<br />
-<br />
-<br />
-
-@foreach (Question question in Model.Questions)
-{
-    <div>
-        <h4>Question @questionNum: @question.Prompt </h4>
-        @{questionNum++;}
+<body >
+    <div id="printableArea">
+    <div >
+        <h1>@Model.NameOfTest</h1>
         <br />
-    </div>
-
-    <div>
-        <h6> Correct Answer: @question.Answer</h6>
-
+        <div id="testDates">
+            <h4> Created at: @Model.CreatedAt</h4>
+            <br />
+            <h4> Updated at: @Model.UpdatedAt</h4>
+        </div>
         <div>
-            @if (question.ImgRelatedToPrompt != null)
+            <h4 id="name"></h4>
+        </div>
+    </div>
+    <br />
+    <br />
+
+
+    @foreach (Question question in Model.Questions)
+    {
+        <div>
+            @if (question.Type == "True/False")
             {
-                <img src="@question.ImgRelatedToPrompt" alt="Picture for question @questionNum" width="200" height="200" style="padding:30px">
-                //We could do the styling in the CSS file.
+                <h3>True or False? </h3>
             }
+            else if (question.Type == "Free Text")
+            {
+                <h3>Short answer (2-4 sentences) </h3>
+            }
+            else
+            {
+                <h3>Multiple Choice: Pick the best option. </h3>
+            }
+            <h4>Question @questionNum: @question.Prompt </h4>
+            @{questionNum++;}
+            <br />
         </div>
 
-        @if (question.Options != null)
-        {
-            m = 0;
-            foreach (Option option in question.Options)
+        <div>
+
+            <div>
+                @if (question.ImgRelatedToPrompt != null)
+                {
+                    <img class="imgRelatedToPrompts" src="@question.ImgRelatedToPrompt" alt="Picture for question @questionNum">
+                }
+            </div>
+
+            @if (question.Options != null)
             {
-                //Do I need to enumerate A,B,C,D,E?
+                m = 0;
+                foreach (Option option in question.Options)
+                {
+                    //Do I need to enumerate A,B,C,D,E?
 
+                    <h6>@multipleChoice[m] : @option.Label</h6>
 
-
-
-                <h6>@multipleChoice[m] : @option.Label</h6>
-
-                m++;
-            }
-
-
-        }
-        
-        <br />
-    </div>
+                    m++;
+                }
 
 
             }
-<br />
-<br />
-<br />
-<div>
-    <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">Edit Test</a>
+
+            <div class="answers">
+                <h6> Correct Answer: @question.Answer</h6>
+            </div>
+
+            <br />
+        </div>
+    }
+    <br />
+    <br />
+
+
+
+    <br />
+    </div id="printableArea">
+</body>
+
+<div class="buttons">
+    <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id">
+        <input class="btn btn-primary" type="button" value="Edit Test">
+    </a>
+
+    <button class="btn btn-info" onclick="printableTest(@Model.Questions.Count)">Student View</button>
     
-
-    <!--future button to go to the edit form-->
+    <button class="btn btn-secondary" onclick="printDiv('printableArea')">Print Test</button>
 </div>
+
+
 
 

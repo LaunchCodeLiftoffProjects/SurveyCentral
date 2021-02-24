@@ -13,3 +13,6 @@ const utilFunctions = {
 }
 
 window.utilFunctions = utilFunctions;
+
+
+

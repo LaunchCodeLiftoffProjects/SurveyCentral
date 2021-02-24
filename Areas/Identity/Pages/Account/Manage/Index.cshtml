@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model IndexModel
 @{
     ViewData["Title"] = "Profile";
@@ -34,7 +34,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Emoji"></label>
-                <input asp-for="Input.Emoji">
+                <select asp-for="Input.Emoji" id="Input.Emoji" name="Input.Emoji">
+                    <option value="🐶">🐶</option>
+                    <option value="🐱">🐱</option>
+                    <option value="🐺">🐺</option>
+                    <option value="🐍">🐍</option>
+                    <option value="🦄">🦄</option>
+                    <option value="🦝">🦝</option>
+                    <option value="🐵">🐵</option>
+                    <option value="🐱">🐱</option>
+                    <option value="🦊">🦊</option>
+                    <option value="🐸">🐸</option>
+                    <option value="🐰">🐰</option>
+                    <option value="🐻">🐻</option>
+                </select>
             </div>
             <button id="update-profile-button" type="submit" class="btn btn-primary">Save</button>
         </form>
