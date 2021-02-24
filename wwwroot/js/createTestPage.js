@@ -1,7 +1,7 @@
 ﻿
 const qSectionId = "questionsSection";
 const addQuestionBtnId = "createTestFormAddQuestion";
-const submitTestBtnId = "submitTest";
+const submitTestBtnId = "submit";
 
 const updateDisplayNum = (qId) => {
     // <!> Unfinished function <!>
@@ -23,9 +23,9 @@ const buildTypeSelectStr = qId => {
             <option value="none" selected disabled hidden> 
                 Select an Option 
             </option> 
-            ${buildSelectOptionStr("trueFalse", "True/False")}
-            ${buildSelectOptionStr("multipleChoice", "Multiple Choice")}
-            ${buildSelectOptionStr("textInput", "Text Input")}
+            ${buildSelectOptionStr("True/False", "True/False")}
+            ${buildSelectOptionStr("Multiple Choice", "Multiple Choice")}
+            ${buildSelectOptionStr("Free Text", "Text Input")}
         </select>`;
 }
 
@@ -71,14 +71,14 @@ const populate = (qId) => {
     const qAnswerElement = document.getElementById(`qAnswer-${qId}`);
     const type = selectedTypeElement.value;
 
-    if (type === "trueFalse") {
+    if (type === "True/False") {
         qAnswerElement.innerHTML = `<label for='trueFalse${qId}'>Correct Answer:</label>
             <select name='trueFalse${qId}' id="trueFalse${qId}">
-             <option value="${qId}">Select One</option>
-              <option value="true${qId}">True</option>
-              <option value="false${qId}">False</option>
+             <option disabled>Select One</option>
+              <option value="True">True</option>
+              <option value="False">False</option>
             </select>`;
-    } else if (type === "multipleChoice") {
+    } else if (type === "Multiple Choice") {
         qAnswerElement.innerHTML = `<p>Choices:</p>
             <label for="a${qId}">A</label>
             <input type="text" id="a${qId}" name="a${qId}">
@@ -92,14 +92,14 @@ const populate = (qId) => {
             <input type="text" id="e${qId}" name="e${qId}"><br>
             <label for="mulChoiceCorrect${qId}">Correct Answer:</label>
             <select name="mulChoiceCorrect${qId}" id="mulChoiceCorrect${qId}">
-              <option value="correct${qId}">Select One</option>
-              <option value="aCorrect${qId}">A</option>
-              <option value="bCorrect${qId}">B</option>
-              <option value="cCorrect${qId}">C</option>
-              <option value="dCorrect${qId}">D</option>
-              <option value="eCorrect${qId}">E</option>
+              <option disabled>Select One</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="E">E</option>
             </select>`;
-    } else if (type === "textInput") {
+    } else if (type === "Free Text") {
         qAnswerElement.innerHTML = `<label for="input${qId}">Correct Answer:</label>
             <input type="text" id="input${qId}" name="input${qId}">`;
     }
@@ -113,44 +113,133 @@ const deleteQuestion = (qId) => {
     //$(`btnRemove-${qId}`).off();
     const questions = window.createTestPage.testQuestions.filter(id => id !== qId);
     window.createTestPage.testQuestions = questions;
-    document.getElementById(`qdiv-${qId}`).innerHTML = "";
+    document.getElementById(`qdiv-${qId}`).remove();
+}
+
+const saveNewTestRecord = (json) => {
+    fetch('http://localhost:5001/test/ProcessAddTestForm/', {
+        method: 'post',
+        body: json
+    }).then(function (response) {
+        return response.json();
+    }).then(function (data) {
+        return /* do something with data */
+    });
+}
+
+const compileNewTestData = () => {
+    const testName = document.getElementById('testName').value;
+    const description = document.getElementById('testDescription').value;
+
+    const validationErrors = [];
+    // For any value that is invalid, push an object to this array during this process
+    /// an object with the fields defined below: the id of the html element, and a message to be appended to said element
+    /// { htmlId: "", errorMsg: "" }
+
+    if (testName === "") {
+        validationErrors.push({
+            htmlId: `testName`,
+            errorMsg: "Please provide a test name that is between 3 and 50 characters."
+        });
+    } else if (testName.length < 3 || testName.length > 50) {
+        validationErrors.push({
+            htmlId: `testName`,
+            errorMsg: "Please provide a test name that is between 3 and 50 characters."
+        });
+    }
+
+    const newTest = {
+        "NameOfTest": testName,
+        "Description": description,
+        "Questions": []
+    }
+
+    //loop through all questions of form
+    const questions = window.createTestPage.testQuestions;
+
+    for (let qId of questions) {
+        const type = document.getElementById(`type-${qId}`).value;
+
+        if (type === "") {
+            validationErrors.push({
+                htmlId: `type-${qId}`,
+                errorMsg: "Please select a type for this question"
+            });
+        }
+
+
+        const newQuestion = {
+            "Prompt": document.getElementById(`prompt-${qId}`).value,
+            "Type": type,
+            "ImgRelatedToPrompt": document.getElementById(`imageLink-${qId}`).value
+        }
+
+        let answer;
+        let options = null;
+
+        // free text, just grab value fro input
+        // if true false, just grab value of select, and then set answer to "True" for true, or "False" for false
+        // if multiple-choice, will need to define and grab the options, which will be objects with label and value,
+        /// and then the answer is still set on the overall question object with the property "Answer", and the value will be the 
+        /// letter value of the correct option (A,B,C,D,E)
+
+        if (type === "True/False") {
+            answer = document.getElementById(`trueFalse${qId}`).value;
+        } else if (type === "Free Text") {
+            answer = document.getElementById(`input${qId}`).value;
+        } else if (type === "Multiple Choice") {
+            answer = document.getElementById(`mulChoiceCorrect${qId}`).value;
+
+            options = [
+                {
+                    "Value": "A",
+                    "Label": document.getElementById(`a${qId}`).value
+                },
+                {
+                    "Value": "B",
+                    "Label": document.getElementById(`b${qId}`).value
+                },
+                {
+                    "Value": "C",
+                    "Label": document.getElementById(`c${qId}`).value
+                },
+                {
+                    "Value": "D",
+                    "Label": document.getElementById(`d${qId}`).value
+                },
+                {
+                    "Value": "E",
+                    "Label": document.getElementById(`e${qId}`).value
+                },
+            ];
+        }
+
+
+        newQuestion["Answer"] = answer;
+        newQuestion["Options"] = options
+        newTest["Questions"].push(newQuestion);
+    }
+
+    if (validationErrors.length > 0) {
+        newTest["validationErrors"] = validationErrors;
+    }
+
+    return newTest;
 }
 
 
-let questionList = [];
-const submitTest (ev) => {
 
-    //loop through all questions of form
-    for (i = 0; i++; i < questions.length) {
+const submitTest = (ev) => {
+    // function call to clear off any existing span elements appended to inputs from previous invalid submitTest calls
+    const newTestJson = compileNewTestData();
 
-        let question = {
-            "Prompt": document.getElementById(`prompt-${questions[i]}.value`),
-            "Type": document.getElementById(`type-${questions[i]}.value`), //does this format work w backend?
-            "Image": document.getElementById(`imageLink-${qId}.value`),
-            "Answer": document.getElementById(), //how to isolate answer?
-            //how to get options for MC?
-
+    if (newTestJson["validationErrors"]) {
+        for (let e of validationErrors) {
+            document.getElementById(e["htmlId"].appendChild(`<span>${e["errorMsg"]}</span>`));
         }
-
-        questionList.push(question);
+    } else {
+        saveNewTestRecord(newTestJson);
     }
-
-    let test = {
-        "NameOfTest": document.getElementById('testName'),
-        "Description": document.getElementById('testDescription'),
-        "Questions": questionList,
-    }
-
-    fetch('http://localhost:5001/test/ProcessAddTestForm/', {
-        method: 'post',
-        body: test
-            }).then(function (response) {
-            return response.json();
-        }).then(function (data) {
-            return /* do something with data */
-        });
-
-    document.querySelector('form').reset();
 }
 
 //*******HTML form input => JS object
@@ -158,35 +247,35 @@ const submitTest (ev) => {
 //    "NameOfTest": "Mini Quiz",
 //        "Description": "A short quiz to test DB connection.",
 //            "Questions": [{
-                "Prompt": "Is the Earth is the 3rd planet from the sun?",
-                "Answer": "True",
-                "Type": "True/False"
-            },
-            {
-                "Prompt": "What does API stand for?",
-                "Answer": "Application Programming Interface",
-                "Type": "Free Text"
-            },
-            {
-                "Prompt": "Which of the following states is the largest?",
-                "Type": "Multiple Choice",
-                "Options": [{
-                    "Value": "A",
-                    "Label": "Kansas"
-                },
-                {
-                    "Value": "B",
-                    "Label": "Texas"
-                },
-                {
-                    "Value": "C",
-                    "Label": "California"
-                },
-                {
-                    "Value": "D",
-                    "Label": "Alaska"
-                }],
-                "Answer": "D"
+//"Prompt": "Is the Earth is the 3rd planet from the sun?",
+//    "Answer": "True",
+//        "Type": "True/False"
+//            },
+//{
+//    "Prompt": "What does API stand for?",
+//        "Answer": "Application Programming Interface",
+//            "Type": "Free Text"
+//},
+//{
+//    "Prompt": "Which of the following states is the largest?",
+//        "Type": "Multiple Choice",
+//            "Options": [{
+//                "Value": "A",
+//                "Label": "Kansas"
+//            },
+//            {
+//                "Value": "B",
+//                "Label": "Texas"
+//            },
+//            {
+//                "Value": "C",
+//                "Label": "California"
+//            },
+//            {
+//                "Value": "D",
+//                "Label": "Alaska"
+//            }],
+//                "Answer": "D"
 //            }]
 //}
 
@@ -203,7 +292,7 @@ const createTestPageLoad = () => {
         document.getElementById(submitTestBtnId).addEventListener("click", (ev) => {
             ev.preventDefault();
             submitTest();
-        };
+        });
     };
 }
 
