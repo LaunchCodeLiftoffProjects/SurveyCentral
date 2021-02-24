@@ -7,12 +7,12 @@
 <style>
     .sidebar {
         margin: 0;
-        padding-left: 10px;
+        padding: 20px;
         width: 10%;
         height: 100%;
         background-color: #f1f1f1;
         position: fixed;
-        overflow: auto;
+        text-align: center;
     }
 
         .sidebar a {
@@ -20,7 +20,9 @@
             color: black;
             padding: 16px;
             text-decoration: none;
+            overflow: hidden;
         }
+        
 
             .sidebar a.active {
                 background-color: #467fd0;
@@ -108,17 +110,12 @@
     {
         <div class="row">
             <div class="sidebar">
-                
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Menu</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Tests</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
-                        </li>
-                    </ul>
-                
+                    <h5>Menu</h5>
+                    <br />
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Tests</a>
+                    <br />    
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
+                     
             </div>
         </div>
         <div class="container">
