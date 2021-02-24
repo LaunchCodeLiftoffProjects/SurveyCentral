@@ -1,64 +1,85 @@
 ﻿@model TestCentral.Models.Test
+    <script src="~/js/testDetails.js"></script>
 
 @{
     ViewData["Title"] = "UpdateTest";
+    int questionNumber = 1;
+    string[] multipleChoice = { "A", "B", "C", "D", "E" };
+    int m = 0;
 }
 
 <h1>Edit Test</h1>
 
 <h4>@Model.NameOfTest</h4>
 <hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="UpdateTest">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="Id" />
-            <div class="form-group">
-                <label asp-for="NameOfTest" class="control-label">Name of Test</label>
-                <input asp-for="NameOfTest" class="form-control" />
-                <span asp-validation-for="NameOfTest" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Description" class="control-label"></label>
-                <input asp-for="Description" class="form-control" />
-                <span asp-validation-for="Description" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Status" class="control-label"></label>
-                <input asp-for="Status" class="form-control" />
-                <span asp-validation-for="Status" class="text-danger"></span>
-            </div>
-            @foreach (Question question in Model.Questions)
-            {
+<body>
+
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="UpdateTest">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="@Model.Id" />
                 <div class="form-group">
-                    <h6>Question:</h6>
-                    <label asp-for="@question.Prompt" class="control-label"></label>
-                    <input asp-for="@question.Prompt" class="form-control" />
-                    <span asp-validation-for="@question.Prompt" class="text-danger"></span>
-                    <label asp-for="@question.Answer" class="control-label"></label>
-                    <input asp-for="@question.Answer" class="form-control" />
-                    <span asp-validation-for="@question.Answer" class="text-danger"></span>
-
-                    @if (question.Options != null)
-                    {
-                        @foreach (Option option in question.Options)
-                        {
-                            <label asp-for="@option.Label" class="control-label">Answer Option</label>
-                            <input asp-for="@option.Label" class="form-control" />
-                        }
-                    }
+                    <label asp-for="NameOfTest" class="control-label">Name of Test</label>
+                    <input asp-for="NameOfTest" class="form-control" />
+                    <span asp-validation-for="NameOfTest" class="text-danger"></span>
                 </div>
-            }
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
-            </div>
-        </form>
-    </div>
-</div>
+                <div class="form-group">
+                    <label asp-for="Description" class="control-label"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+                @for (int i = 0; i < Model.Questions.Count(); i++)
+                {
+                    <input type="hidden" asp-for="@Model.Questions[i].Id"/>
+                    <div class="form-group" id="qform-@Model.Questions[i].Id">
+                        <h6>Question: @questionNumber</h6>
+                        @{questionNumber++;}
+                        <label asp-for="@Model.Questions[i].Prompt" class="control-label"></label>
+                        <input asp-for="@Model.Questions[i].Prompt" class="form-control" />
+                        <span asp-validation-for="@Model.Questions[i].Prompt" class="text-danger"></span>
+                        <label asp-for="@Model.Questions[i].Answer" class="control-label"></label>
+                        <input asp-for="@Model.Questions[i].Answer" class="form-control" />
+                        <span asp-validation-for="@Model.Questions[i].Answer" class="text-danger"></span>
+                        @if (@Model.Questions[i].ImgRelatedToPrompt != null) 
+                        {
+                            <h6>Picture Sample</h6>
+                            <img src="@Model.Questions[i].ImgRelatedToPrompt" class="imgRelatedToPrompts">
+                        }
+                        <label asp-for="@Model.Questions[i].ImgRelatedToPrompt" class="control-label">Question Image Link</label>
+                        <input asp-for="@Model.Questions[i].ImgRelatedToPrompt" class="form-control" />
+                        <span asp-validation-for="@Model.Questions[i].ImgRelatedToPrompt" class="text-danger"></span>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
+                        @{Question currentQuestion = Model.Questions[i]; }
+
+                        @if (currentQuestion.Options != null)
+                        {
+                            m = 0;
+                            int optionCount = currentQuestion.Options.Count();
+
+                            @for (int k = 0; k < optionCount; k++)
+                            {
+                                <input type="hidden" asp-for="@Model.Questions[i].Options[k].Id" />
+                                <label asp-for="@Model.Questions[i].Options[k].Label" class="control-label">Option @multipleChoice[m]</label>
+                                m++;
+                                <input asp-for="@Model.Questions[i].Options[k].Label" class="form-control" />
+                            }
+                        }
+
+                        <button class="btn btn-danger" type="button" onclick="postDeleteQuestion(@Model.Questions[i].Id)" id="deleteButton-@Model.Questions[i].Id">Delete Question</button>
+                    </div>
+                }
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@Model.Id" />
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div>
+        <a asp-action="Index">Back to List</a>
+    </div>
+</body>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}

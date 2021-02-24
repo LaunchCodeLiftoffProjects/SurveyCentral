@@ -9,7 +9,7 @@ namespace TestCentral.ViewModels
 {
     public class EditTestViewModel
     {
-        public int TestId { get; set; }
+        public int Id { get;}
         [Required(ErrorMessage = "Test name is required.")]
         [StringLength(50, MinimumLength = 3, ErrorMessage = "Test name must be between 3 and 50 characters")]
         public string NameOfTest { get; set; }
@@ -24,15 +24,12 @@ namespace TestCentral.ViewModels
 
 
 
-        public EditTestViewModel(Test theTest) //need to get the options and questions loaded too
+        public EditTestViewModel(List<Question> questions, List<Option> options) //need to get the options and questions loaded too
         {
-            //This hopefully will autoload the info when someone clicks to edit the test.
-            NameOfTest = theTest.NameOfTest;
-            Description = theTest.Description;
-            Questions = theTest.Questions.ToList();
-
-            //How do I grab the options with the questions?
+            Questions = questions;
+            Options = options;
         }
+
 
         public EditTestViewModel() { }
     }

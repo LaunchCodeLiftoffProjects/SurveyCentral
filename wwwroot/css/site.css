@@ -60,12 +60,32 @@ html {
 
 body {
   /* Margin bottom by footer height */
-  margin-bottom: 60px;
+  margin-bottom: 100px;
+  padding-bottom: 100px;
 }
 .footer {
-  position: absolute;
+  position: fixed;
   bottom: 0;
   width: 100%;
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
+  background-color: aliceblue;
 }
+
+.hiddenForPrinting{
+    visibility:hidden;
+}
+
+.answers {
+    font: italic small-caps bold;
+    background-color:lightyellow;
+}
+
+.imgRelatedToPrompts {
+    width: 200px;
+    height: 200px;
+    padding: 30px;
+    border-radius: 50%;
+    margin-left: 20px;
+}
+
