@@ -1,9 +1,7 @@
-﻿//Adds next question for user to fill out upon clicking Add Question button:
-
-
+﻿
 const qSectionId = "questionsSection";
-const addQuestionBtnId = "createTestFormAddQuestion"
-
+const addQuestionBtnId = "createTestFormAddQuestion";
+const submitTestBtnId = "submitTest";
 
 const updateDisplayNum = (qId) => {
     // <!> Unfinished function <!>
@@ -11,10 +9,14 @@ const updateDisplayNum = (qId) => {
     // Do some action to set relevant DOM element with that new number
 }
 
+//Adds additional question to test after upon Add Question button click:
+
 const buildH3Str = text => {
     return `<h3>${text}</h3>`
 }
-
+const buildSelectOptionStr = (value, text) => {
+    return `<option value="${value}">${text}</option>`
+}
 const buildTypeSelectStr = qId => {
     return `<label for="type-${qId}">Type:</label>
         <select name="Type" id="type-${qId}">
@@ -27,32 +29,16 @@ const buildTypeSelectStr = qId => {
         </select>`;
 }
 
-const buildSelectOptionStr = (value, text) => {
-    return `<option value="${value}">${text}</option>`
-}
-
-const deleteQuestion = (qId) => {
-    // <!> Will need to remove event listeners from DOM elements before removing <!>
-    //$(`type-${qId}`).off();
-    //$(`btnRemove-${qId}`).off();
-    const questions = window.createTestPage.testQuestions.filter(id => id !== qId);
-    window.createTestPage.testQuestions = questions;
-    document.getElementById(`qdiv-${qId}`).innerHTML = "";
-}
-
 const addNewQuestion = () => {
     const qId = window.utilFunctions.guidGenerator();
-    const questions = window.createTestPage.testQuestions
-    const qDisplayNum = questions.length + 1
+    const questions = window.createTestPage.testQuestions;
+    const qDisplayNum = questions.length + 1;
     questions.push(qId);
 
     const qNode = document.createElement("div");
     qNode.id = `qdiv-${qId}`;
 
-
-    qNode.append
-
-    qNode.innerHTML = `${buildH3Str(qDisplayNum)} <button class="btn btn-danger" id="btnRemove-${qId}"> X </button>
+    qNode.innerHTML = `${buildH3Str(qDisplayNum)} <button class="btn btn-danger" id="btnRemove-${qId}"> Delete Question </button>
     <div>
         <label for="type-${qId}">Type:</label>
         ${buildTypeSelectStr(qId)}
@@ -62,6 +48,7 @@ const addNewQuestion = () => {
         <input type="text" id="prompt-${qId}" name="Prompt">
     </div><br>
     <div>
+//add validation for proper link
       <label for="imageLink-${qId}">Add Link to Image (optional):</label>
       <input type="text" id="imageLink-${qId}" name="ImgRelatedToPrompt">
     </div>
@@ -72,11 +59,12 @@ const addNewQuestion = () => {
     document.getElementById(`type-${qId}`).addEventListener("change", ev => populate(qId));
     document.getElementById(`btnRemove-${qId}`).addEventListener("click", ev => {
         ev.preventDefault();
-        deleteQuestion(qId)
+        deleteQuestion(qId);
     });
 }
 
-//Populates rest of question once user selects type from dropdown:
+//Populates question type upon user selection:
+//***** need to create objects to hold the strings of HTML
 
 const populate = (qId) => {
     const selectedTypeElement = document.getElementById(`type-${qId}`);
@@ -117,7 +105,94 @@ const populate = (qId) => {
     }
 }
 
-//Prevents form from sending upon click on Add Question button
+//***delete unwanted previously added question:
+
+const deleteQuestion = (qId) => {
+    // <!> Will need to remove event listeners from DOM elements before removing <!>
+    //$(`type-${qId}`).off();
+    //$(`btnRemove-${qId}`).off();
+    const questions = window.createTestPage.testQuestions.filter(id => id !== qId);
+    window.createTestPage.testQuestions = questions;
+    document.getElementById(`qdiv-${qId}`).innerHTML = "";
+}
+
+
+let questionList = [];
+const submitTest (ev) => {
+
+    //loop through all questions of form
+    for (i = 0; i++; i < questions.length) {
+
+        let question = {
+            "Prompt": document.getElementById(`prompt-${questions[i]}.value`),
+            "Type": document.getElementById(`type-${questions[i]}.value`), //does this format work w backend?
+            "Image": document.getElementById(`imageLink-${qId}.value`),
+            "Answer": document.getElementById(), //how to isolate answer?
+            //how to get options for MC?
+
+        }
+
+        questionList.push(question);
+    }
+
+    let test = {
+        "NameOfTest": document.getElementById('testName'),
+        "Description": document.getElementById('testDescription'),
+        "Questions": questionList,
+    }
+
+    fetch('http://localhost:5001/test/ProcessAddTestForm/', {
+        method: 'post',
+        body: test
+            }).then(function (response) {
+            return response.json();
+        }).then(function (data) {
+            return /* do something with data */
+        });
+
+    document.querySelector('form').reset();
+}
+
+//*******HTML form input => JS object
+//{
+//    "NameOfTest": "Mini Quiz",
+//        "Description": "A short quiz to test DB connection.",
+//            "Questions": [{
+                "Prompt": "Is the Earth is the 3rd planet from the sun?",
+                "Answer": "True",
+                "Type": "True/False"
+            },
+            {
+                "Prompt": "What does API stand for?",
+                "Answer": "Application Programming Interface",
+                "Type": "Free Text"
+            },
+            {
+                "Prompt": "Which of the following states is the largest?",
+                "Type": "Multiple Choice",
+                "Options": [{
+                    "Value": "A",
+                    "Label": "Kansas"
+                },
+                {
+                    "Value": "B",
+                    "Label": "Texas"
+                },
+                {
+                    "Value": "C",
+                    "Label": "California"
+                },
+                {
+                    "Value": "D",
+                    "Label": "Alaska"
+                }],
+                "Answer": "D"
+//            }]
+//}
+
+
+
+//Processes Add Question and Save Test; prevents form from sending upon click:
 
 const createTestPageLoad = () => {
     window.onload = (event) => {
@@ -125,9 +200,12 @@ const createTestPageLoad = () => {
             ev.preventDefault();
             addNewQuestion();
         });
+        document.getElementById(submitTestBtnId).addEventListener("click", (ev) => {
+            ev.preventDefault();
+            submitTest();
+        };
     };
 }
-
 
 const createTestPage = {
     createTestPageLoad,
