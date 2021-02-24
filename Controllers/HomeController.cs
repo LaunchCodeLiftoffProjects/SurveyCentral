@@ -20,8 +20,8 @@ namespace TestCentral.Controllers
 
         public IActionResult Index()
         {
-            return View();
-            //return RedirectToAction("Index", "Test");
+            
+            return RedirectToAction("Index", "Test");
         }
 
         public IActionResult Privacy()
