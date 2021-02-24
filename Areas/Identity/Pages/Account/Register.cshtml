@@ -1,4 +1,4 @@
-@page
+﻿@page
 @model RegisterModel
 @{
     ViewData["Title"] = "Register";
@@ -44,8 +44,20 @@
             </div>
             <div class="form-group">
                 <label asp-for="Input.Emoji"></label>
-                <input asp-for="Input.Emoji" class="form-control" />
-                <span asp-validation-for="Input.Emoji" class="text-danger"></span>
+                <select asp-for="Input.Emoji" id="Input.Emoji" name="Input.Emoji">
+                    <option value="🐶">🐶</option>
+                    <option value="🐱">🐱</option>
+                    <option value="🐺">🐺</option>
+                    <option value="🐍">🐍</option>
+                    <option value="🦄">🦄</option>
+                    <option value="🦝">🦝</option>
+                    <option value="🐵">🐵</option>
+                    <option value="🐱">🐱</option>
+                    <option value="🦊">🦊</option>
+                    <option value="🐸">🐸</option>
+                    <option value="🐰">🐰</option>
+                    <option value="🐻">🐻</option>
+                </select>
             </div>
             <button type="submit" class="btn btn-primary">Register</button>
         </form>

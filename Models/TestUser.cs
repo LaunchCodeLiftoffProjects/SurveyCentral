@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 
 namespace TestCentral.Models
 {
+    //Extend Default Identity Fields (IdentityUser)
+
     public class TestUser: IdentityUser
     {   [PersonalData]
         public string FirstName { get; set; }

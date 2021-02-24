@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+﻿ <!DOCTYPE html>
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<TestUser> SignInManager
@@ -103,6 +103,8 @@
     </header>
     @if (SignInManager.IsSignedIn(User))
     {
+        //Shows side nav bar if signed in
+
 <div class="row">
     <div class="sidebar">
         <li class="active">
