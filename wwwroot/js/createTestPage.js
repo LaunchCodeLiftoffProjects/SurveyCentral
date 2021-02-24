@@ -227,15 +227,20 @@ const compileNewTestData = () => {
     return newTest;
 }
 
-
+const insertAfter = (referenceNode, newNode) => {
+    referenceNode.parentNode.insertBefore(newNode, referenceNode.nextSibling);
+}
 
 const submitTest = (ev) => {
     // function call to clear off any existing span elements appended to inputs from previous invalid submitTest calls
     const newTestJson = compileNewTestData();
 
-    if (newTestJson["validationErrors"]) {
+    const { validationErrors } = newTestJson;
+
+    if (validationErrors) {
         for (let e of validationErrors) {
-            document.getElementById(e["htmlId"].appendChild(`<span>${e["errorMsg"]}</span>`));
+            console.log(e["htmlId"]);
+            // some code to get an html node using e["htmlId"] and then set a span next to it resembling `<span>${e["errorMsg"]}</span>`
         }
     } else {
         saveNewTestRecord(newTestJson);
@@ -284,7 +289,7 @@ const submitTest = (ev) => {
 //Processes Add Question and Save Test; prevents form from sending upon click:
 
 const createTestPageLoad = () => {
-    window.onload = (event) => {
+    window.onload = (ev) => {
         document.getElementById(addQuestionBtnId).addEventListener("click", (ev) => {
             ev.preventDefault();
             addNewQuestion();
