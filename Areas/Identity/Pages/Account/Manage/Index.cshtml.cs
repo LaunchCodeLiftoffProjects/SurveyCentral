@@ -121,10 +121,10 @@ namespace TestCentral.Areas.Identity.Pages.Account.Manage
             {
                 user.SchoolName = Input.SchoolName;
             }
-            if (Input.Emoji != user.Emoji)
-            {
-                user.Emoji = Input.Emoji;
-            }
+            //if (Input.EmojiName != user.Emoji)
+            //{
+            //    user.EmojiName = Input.Emoji;
+            //}
 
             await _userManager.UpdateAsync(user);
 
