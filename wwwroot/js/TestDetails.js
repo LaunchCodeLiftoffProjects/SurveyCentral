@@ -21,10 +21,9 @@ function printableTest(questionsCount) {
     }
 }
 
-//Delete a question while editing a test
+//Delete a question while editing a test. NOTE - you'll have to update the local host for your computer
 function postDeleteQuestion(questionId) {
     if (window.confirm("Are you sure you want to delete this question?")) {
-        ;
         fetch('http://localhost:63752/Question/DeleteQuestion/' + questionId,
             {
                 method: 'POST'
@@ -33,12 +32,10 @@ function postDeleteQuestion(questionId) {
                 let questionHTML = document.getElementById(`qform-${questionId}`);
                 questionHTML.innerHTML = "";
                 location.reload();
-
             })
             .catch(error => {
                 console.error('There has been an issue');
             });
-
     }
     return;
 }
