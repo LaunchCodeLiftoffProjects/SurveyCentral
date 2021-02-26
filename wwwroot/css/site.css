@@ -76,8 +76,12 @@ body {
 }
 
 .answers {
-    font: italic small-caps bold;
-    background-color:lightyellow;
+    background-color: yellow;
+    font-size: 20px;
+}
+
+.questionsPromt{
+
 }
 
 .imgRelatedToPrompts {
