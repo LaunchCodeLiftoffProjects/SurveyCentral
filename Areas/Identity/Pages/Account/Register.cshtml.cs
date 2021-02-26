@@ -20,6 +20,8 @@ namespace TestCentral.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
+        //To create custom fields, must extend User class.  It defaults to IdentityUser, which uses default Identity fields
+
         private readonly SignInManager<TestUser> _signInManager;
         private readonly UserManager<TestUser> _userManager;
         private readonly ILogger<RegisterModel> _logger;
@@ -100,6 +102,8 @@ namespace TestCentral.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
+                //Add custom fields here as well
+
                 var user = new TestUser { UserName = Input.Email, Email = Input.Email, FirstName = Input.FirstName, LastName = Input.LastName, SchoolName = Input.SchoolName, Emoji = Input.Emoji };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)

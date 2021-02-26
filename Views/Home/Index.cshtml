@@ -8,8 +8,10 @@
 @inject UserManager<TestUser> UserManager
 
 
+
 @if (SignInManager.IsSignedIn(User))
-{
+{ 
+    //Below code runs if user is logged in
     <div class="text-center">
         <h1 class="display-4">Hello @UserManager.GetUserName(User)!</h1>
         <p>Welcome to TestCentral!</p>
@@ -17,6 +19,9 @@
 }
 else
 {
+
+    //Code that shows if not logged in
+
     <div class="text-center">
         <h1 class="display-4">Welcome to TestCentral. Please register or login.</h1>
     </div>
