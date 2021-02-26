@@ -71,37 +71,15 @@
             </div>
         </div>
     </div>
-    <button type="submit" class="btn btn-primary">Register</button>
+    <button type="submit" class="btn btn-primary btn-block">Register</button>
 </form>
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial">
 }
 
-@*
+@*      Below code is for external login (Google, etc.)
 
-        <div class="form-group">
-            <label asp-for="Input.Emoji"></label>
-            <select asp-for="Input.Emoji" id="Input.Emoji" name="Input.Emoji">
-                <option value="🐶">🐶</option>
-                <option value="🐱">🐱</option>
-                <option value="🐺">🐺</option>
-                <option value="🐍">🐍</option>
-                <option value="🦄">🦄</option>
-                <option value="🦝">🦝</option>
-                <option value="🐵">🐵</option>
-                <option value="🐱">🐱</option>
-                <option value="🦊">🦊</option>
-                <option value="🐸">🐸</option>
-                <option value="🐰">🐰</option>
-                <option value="🐻">🐻</option>
-            </select>
-
-            <span asp-validation-for="Input.Emoji" class="text-danger"></span>
-        </div>
-        <button type="submit" class="btn btn-primary">Register</button>
-                </form>
-            </div>
         <div class="col-md-6 col-md-offset-2">
                 <section>
                     <h4>Use another service to register.</h4>
