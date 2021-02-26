@@ -60,9 +60,9 @@
                             @for (int k = 0; k < optionCount; k++)
                             {
                                 <input type="hidden" asp-for="@Model.Questions[i].Options[k].Id" />
-                                <label asp-for="@Model.Questions[i].Options[k].Value" class="control-label">Option @multipleChoice[m]</label>
+                                <label asp-for="@Model.Questions[i].Options[k].Label" class="control-label">Option @multipleChoice[m]</label>
                                 m++;
-                                <input asp-for="@Model.Questions[i].Options[k].Value" class="form-control" />
+                                <input asp-for="@Model.Questions[i].Options[k].Label" class="form-control" />
                             }
                         }
                         <br />
