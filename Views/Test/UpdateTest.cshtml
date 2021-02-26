@@ -60,12 +60,12 @@
                             @for (int k = 0; k < optionCount; k++)
                             {
                                 <input type="hidden" asp-for="@Model.Questions[i].Options[k].Id" />
-                                <label asp-for="@Model.Questions[i].Options[k].Label" class="control-label">Option @multipleChoice[m]</label>
+                                <label asp-for="@Model.Questions[i].Options[k].Value" class="control-label">Option @multipleChoice[m]</label>
                                 m++;
-                                <input asp-for="@Model.Questions[i].Options[k].Label" class="form-control" />
+                                <input asp-for="@Model.Questions[i].Options[k].Value" class="form-control" />
                             }
                         }
-
+                        <br />
                         <button class="btn btn-danger" type="button" onclick="postDeleteQuestion(@Model.Questions[i].Id)" id="deleteButton-@Model.Questions[i].Id">Delete Question</button>
                     </div>
                 }

@@ -12,10 +12,9 @@ a {
   color: #0366d6;
 }
 
-.btn-primary {
-  color: #fff;
-  background-color: #1b6ec2;
-  border-color: #1861ac;
+
+.btn btn-danger{
+    padding: 5px;
 }
 
 .nav-pills .nav-link.active, .nav-pills .show > .nav-link {
@@ -89,3 +88,7 @@ body {
     margin-left: 20px;
 }
 
+/* imported button that doesn't serve purpose. */
+#email-verification{
+    visibility: hidden;
+}

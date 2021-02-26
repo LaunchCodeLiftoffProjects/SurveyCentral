@@ -7,12 +7,12 @@
 <style>
     .sidebar {
         margin: 0;
-        padding-left: 10px;
+        padding: 20px;
         width: 10%;
         height: 100%;
         background-color: #f1f1f1;
         position: fixed;
-        overflow: auto;
+        text-align: center;
     }
 
         .sidebar a {
@@ -20,7 +20,9 @@
             color: black;
             padding: 16px;
             text-decoration: none;
+            overflow: hidden;
         }
+        
 
             .sidebar a.active {
                 background-color: #467fd0;
@@ -50,6 +52,7 @@
     <script src="~/js/site.js"></script>
     <script src="~/js/util.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"
           href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
@@ -62,31 +65,32 @@
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
             <div class="container">
                 @* Add Final App Name Below*@
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TestCentral</a>
+                <a class="navbar-brand" asp-area="" asp-controller="Test" asp-action="Index">TestCentral</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
+
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         @if (SignInManager.IsSignedIn(User))
                         {
 
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                            </li>
+                            @*<li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Home</a>
+                                </li>*@
+                            //<li> class="nav-item">
+                            //<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            //</li>
                             //<li class="nav-item">  //Move this to the left bar?
                             //    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
                             //</li>
                             <li class="nav-item">
-                                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @UserManager.GetUserName(User)!</a>
+                                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fas fa-user"></i></a>
                             </li>
                             <li class="nav-item">
                                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark">Logout</button>
+                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i></button>
                                 </form>
                             </li>
                         }
@@ -99,28 +103,27 @@
                                 <a class="nav-link text-dark" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
                             </li>
                         }
+
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
+
     @if (SignInManager.IsSignedIn(User))
     {
-        <div class="row">
-            <div class="sidebar">
-                
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Menu</a>
-                    <ul class="collapse list-unstyled" id="homeSubmenu">
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Tests</a>
-                        </li>
-                        <li>
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
-                        </li>
-                    </ul>
-                
-            </div>
-        </div>
+        <!-- Left side navbar removed for now.-->
+        <!--
+            <div class="row">
+                <div class="sidebar">
+                        <h5>Menu</h5>
+                        <br />
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Tests</a>
+                        <br />
+                        <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
+
+                </div>
+        </div>-->
         <div class="container">
             <main role="main" class="col-9" style="text-align: justify;">
                 @RenderBody()
@@ -136,12 +139,12 @@
             </main>
         </div>
     }
-    
-        <footer class="border-top footer text-muted">
-            <div class="container">
-                &copy; 2021 - TestCentral - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-            </div>
-        </footer>
-        @RenderSection("Scripts", required: false)
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2021 - TestCentral <!-- - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>-->
+        </div>
+    </footer>
+    @RenderSection("Scripts", required: false)
 </body>
 </html>
