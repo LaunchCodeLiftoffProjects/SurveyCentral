@@ -9,12 +9,14 @@ using Microsoft.AspNetCore.Identity;
 
 namespace TestCentral.Data
 {
+    //Extend with IdentityDBContext<IdentityUser> to include Identity fields in database
+
     public class TestDBContext: IdentityDbContext<IdentityUser>
     {
-        public new DbSet<TestUser> Users { get; set; }
         public DbSet<Test> Tests { get; set; }
         public DbSet<Question> Questions { get; set; }
         public DbSet<Option> Options { get; set; }
+        public DbSet<TestUser> TestUsers { get; set; }
 
         public TestDBContext(DbContextOptions<TestDBContext> options)
             : base(options)

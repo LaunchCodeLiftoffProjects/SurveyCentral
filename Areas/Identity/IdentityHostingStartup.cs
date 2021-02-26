@@ -15,10 +15,14 @@ namespace TestCentral.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
+            //This code links it to the MySQL Database
+
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<TestDBContext>(options =>
                     options.UseMySql(
                         context.Configuration.GetConnectionString("DefaultConnection")));
+
+                //Change options below to change password input parameters (alphanumeric, minimum length, etc.)
 
                 services.AddDefaultIdentity<TestUser>(options => options.SignIn.RequireConfirmedAccount = false)
                     .AddEntityFrameworkStores<TestDBContext>();
