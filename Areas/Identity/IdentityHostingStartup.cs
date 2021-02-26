@@ -20,7 +20,13 @@ namespace TestCentral.Areas.Identity
                     options.UseMySql(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-                services.AddDefaultIdentity<TestUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                //Customize registration and password requirements here:
+
+                services.AddDefaultIdentity<TestUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.SignIn.RequireConfirmedEmail = false;
+                    })
                     .AddEntityFrameworkStores<TestDBContext>();
             });
         }
