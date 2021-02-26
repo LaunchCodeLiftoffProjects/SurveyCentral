@@ -88,3 +88,7 @@ body {
     margin-left: 20px;
 }
 
+/* imported button that doesn't serve purpose. */
+#email-verification{
+    visibility: hidden;
+}
