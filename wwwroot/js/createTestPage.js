@@ -181,11 +181,24 @@ const compileNewTestData = () => {
             });
         }
 
-
         const newQuestion = {
             "Prompt": document.getElementById(`prompt-${qId}`).value,
             "Type": type,
-            "ImgRelatedToPrompt": document.getElementById(`imageLink-${qId}`).value
+        }
+
+
+        const imgUrl = document.getElementById(`imageLink-${qId}`).value
+        const imgUrlValid = window.utilFunctions.validURL(imgUrl)
+
+        if (!imgUrlValid) {
+            validationErrors.push({
+                htmlId: `imageLink-${qId}`,
+                errorMsg: "Please provide a valid Url"
+            });
+        }
+
+        if (imgUrl !== "" && imgUrlValid) {
+            newQuestion["ImgRelatedToPrompt"] = imgUrl;
         }
 
         let answer;

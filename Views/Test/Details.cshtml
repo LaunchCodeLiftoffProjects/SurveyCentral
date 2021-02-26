@@ -49,9 +49,9 @@
         <div>
 
             <div>
-                @if (question.ImgRelatedToPrompt != null)
+                @if (question.ImgRelatedToPrompt != null && Uri.IsWellFormedUriString(question.ImgRelatedToPrompt, UriKind.Absolute))
                 {
-                    <img class="imgRelatedToPrompts" src="@question.ImgRelatedToPrompt" alt="Picture for question @questionNum">
+                    <img class="imgrelatedtoprompts" src="@question.ImgRelatedToPrompt" alt="picture for question @questionNum">
                 }
             </div>
 

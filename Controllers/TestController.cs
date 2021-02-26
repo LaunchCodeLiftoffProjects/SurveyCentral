@@ -89,13 +89,26 @@ namespace TestCentral.Controllers
         [Route("/Test/Details/{testId?}")]
         public IActionResult Details(int testId) //Not sure of the view yet, but wanted to get this in place
         {
-            Test theTest = context.Tests
+
+            Test t = context.Tests
+                .Where(t => t.Id == testId)
                 .Include(t => t.Questions)
-                .ThenInclude(q => q.Options)
-                .Single(t => t.Id == testId);
+                .FirstOrDefault();
 
+            int loopRunTimes = 0;
+            foreach (Question q in t.Questions)
+            {
+                if (q.Type == "Multiple Choice")
+                {
+                    List<Option> o = context.Options
+                        .Where(o => o.QuestionId == q.Id)
+                        .ToList();
+                    q.Options = o;
+                }
+                loopRunTimes++;
+            }
 
-            return View(theTest); //hasn't been fully built yet, currently built on index, could be test instead
+            return View("Details", t); //hasn't been fully built yet, currently built on index, could be test instead
         }
 
 
