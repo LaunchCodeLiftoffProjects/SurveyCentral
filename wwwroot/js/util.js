@@ -20,7 +20,7 @@ const validURL = (str) => {
 
 const utilFunctions = {
     guidGenerator,
-    validUrl
+    validURL
 }
 
 window.utilFunctions = utilFunctions;
