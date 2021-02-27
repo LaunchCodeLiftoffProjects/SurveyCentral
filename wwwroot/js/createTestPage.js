@@ -160,6 +160,9 @@ const isValid = (value, minLength = null, maxLength = null) => {
 const compileNewTestData = () => {
     const testName = document.getElementById('testName').value;
     const description = document.getElementById('testDescription').value;
+    const questions = window.createTestPage.testQuestions;
+    
+    
 
     const validationErrors = [];
     // For any value that is invalid, push an object to this array during this process
@@ -169,9 +172,24 @@ const compileNewTestData = () => {
     if (!isValid(testName)) {
         validationErrors.push({
             htmlId: `testName`,
-            errorMsg: "Please provide a test name that is between 3 and 50 characters."
+            errorMsg: "  Please provide a test name that is between 3 and 50 characters."
         });
     }
+
+    if (!isValid(description, 5, 50)) {
+        validationErrors.push({
+            htmlId: `testDescription`,
+            errorMsg: "  Please provide a description that is between 3 and 50 characters."
+        });
+    }
+
+    if (!isValid(questions, 1, 100)) {
+        validationErrors.push({
+            htmlId: `questionsSection`,
+            errorMsg: "  Please provide 1-100 questions."
+        });
+    }
+
 
     const newTest = {
         "NameOfTest": testName,
@@ -180,7 +198,7 @@ const compileNewTestData = () => {
     }
 
     //loop through all questions of form
-    const questions = window.createTestPage.testQuestions;
+    //const questions = window.createTestPage.testQuestions; //moved up to use it for validation
 
     for (let qId of questions) {
         const type = document.getElementById(`type-${qId}`).value;
@@ -204,7 +222,7 @@ const compileNewTestData = () => {
         if (!imgUrlValid && imgUrl != "") { //only requires it if the ImgUrl isn't blank
             validationErrors.push({
                 htmlId: `imageLink-${qId}`,
-                errorMsg: "Please provide a valid Url"
+                errorMsg: "Please provide a valid URL"
             });
         }
 
@@ -215,7 +233,7 @@ const compileNewTestData = () => {
         let answer;
         let options = null;
 
-        // free text, just grab value fro input
+        // free text, just grab value from input
         // if true false, just grab value of select, and then set answer to "True" for true, or "False" for false
         // if multiple-choice, will need to define and grab the options, which will be objects with label and value,
         /// and then the answer is still set on the overall question object with the property "Answer", and the value will be the 
