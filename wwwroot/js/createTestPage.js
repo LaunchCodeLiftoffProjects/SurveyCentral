@@ -260,14 +260,24 @@ const insertAfter = (referenceNode, newNode) => {
 
 const submitTest = (ev) => {
     // function call to clear off any existing span elements appended to inputs from previous invalid submitTest calls
+    const clearPreviousValidationSpan = () => {
+        document.body.getElementsByTagName("span").innerHTML = "";
+    }
+
     const newTestJson = compileNewTestData();
 
     const { validationErrors } = newTestJson;
 
     if (validationErrors) {
         for (let e of validationErrors) {
+            console.log(validationErrors);
             console.log(e["htmlId"]);
             // some code to get an html node using e["htmlId"] and then set a span next to it resembling `<span>${e["errorMsg"]}</span>`
+            var inputNode = document.getElementById(e["htmlId"]);
+            var spanTag = document.createElement("span");
+            spanTag.style = "color: red";
+            spanTag.innerHTML = e["errorMsg"];
+            inputNode.parentNode.insertBefore(spanTag, inputNode.nextSibling);
         }
     } else {
         saveNewTestRecord(newTestJson);
