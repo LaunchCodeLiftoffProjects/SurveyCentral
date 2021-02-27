@@ -48,7 +48,6 @@ const addNewQuestion = () => {
         <input type="text" id="prompt-${qId}" name="Prompt">
     </div><br>
     <div>
-//add validation for proper link
       <label for="imageLink-${qId}">Add Link to Image (optional):</label>
       <input type="text" id="imageLink-${qId}" name="ImgRelatedToPrompt">
     </div>
@@ -260,9 +259,11 @@ const insertAfter = (referenceNode, newNode) => {
 
 const submitTest = (ev) => {
     // function call to clear off any existing span elements appended to inputs from previous invalid submitTest calls
-    const clearPreviousValidationSpan = () => {
-        document.body.getElementsByTagName("span").innerHTML = "";
+    var spans = document.getElementsByTagName('span');
+    for (let span of spans) {
+        span.innerHTML = "";
     }
+
 
     const newTestJson = compileNewTestData();
 
@@ -271,7 +272,6 @@ const submitTest = (ev) => {
     if (validationErrors) {
         for (let e of validationErrors) {
             console.log(validationErrors);
-            console.log(e["htmlId"]);
             // some code to get an html node using e["htmlId"] and then set a span next to it resembling `<span>${e["errorMsg"]}</span>`
             var inputNode = document.getElementById(e["htmlId"]);
             var spanTag = document.createElement("span");
