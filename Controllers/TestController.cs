@@ -33,40 +33,39 @@ namespace TestCentral.Controllers
         }
 
         [HttpPost]
-        public IActionResult ProcessAddTestForm([FromBody]AddTestViewModel addTestViewModel, List<Question> questions, List<Option> options)
+        public IActionResult ProcessAddTestForm([FromBody] AddTestViewModel addTestViewModel)
         {
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 Test newTest = new Test
                 {
                     NameOfTest = addTestViewModel.NameOfTest,
                     Description = addTestViewModel.Description,
                     UpdatedAt = DateTime.Now,
-                    CreatedAt = DateTime.Now,
-                    Questions = addTestViewModel.Questions
+                    CreatedAt = DateTime.Now
                 };
 
                 context.Tests.Add(newTest);
                 context.SaveChanges();
 
-                foreach(Question question in questions)
+                foreach (Question question in addTestViewModel.Questions)
                 {
-                    Question newQuestion = new Question {
+                    Question newQuestion = new Question
+                    {
                         TestId = newTest.Id,
                         Prompt = question.Prompt,
                         Type = question.Type,
                         Answer = question.Answer,
-                        ImgRelatedToPrompt = question.ImgRelatedToPrompt,
-                        Options = question.Options
+                        ImgRelatedToPrompt = question.ImgRelatedToPrompt
                     };
 
                     context.Questions.Add(newQuestion);
                     context.SaveChanges();
 
-                    if (newQuestion.Options != null)
+                    if (question.Options != null)
                     {
 
-                        foreach(Option option in options)
+                        foreach (Option option in question.Options)
                         {
                             Option newOption = new Option
                             {
@@ -75,31 +74,43 @@ namespace TestCentral.Controllers
                                 Label = option.Label
                             };
                             context.Options.Add(newOption);
+                            context.SaveChanges();
                         }
                     }
-                    
-                }
 
-                context.SaveChanges();
+                }
                 return Redirect("/Test/Details/" + newTest.Id);
             }
             return View("Add", addTestViewModel);
         }
-        
-        
+
+
         [HttpGet]
         [Route("/Test/Details/{testId?}")]
         public IActionResult Details(int testId) //Not sure of the view yet, but wanted to get this in place
         {
-            Test theTest = context.Tests
+
+            Test t = context.Tests
+                .Where(t => t.Id == testId)
                 .Include(t => t.Questions)
-                    .ThenInclude(q => q.Options)
-                .Single(t => t.Id == testId);
+                .FirstOrDefault();
 
+            int loopRunTimes = 0;
+            foreach (Question q in t.Questions)
+            {
+                if (q.Type == "Multiple Choice")
+                {
+                    List<Option> o = context.Options
+                        .Where(o => o.QuestionId == q.Id)
+                        .ToList();
+                    q.Options = o;
+                }
+                loopRunTimes++;
+            }
 
-            return View(theTest); //hasn't been fully built yet, currently built on index, could be test instead
+            return View("Details", t); //hasn't been fully built yet, currently built on index, could be test instead
         }
-        
+
 
         [HttpGet]
         public IActionResult Delete(int testId) // this could be an array to delete multiple tests
@@ -121,9 +132,9 @@ namespace TestCentral.Controllers
                 .Single(t => t.Id == testId);
 
             return View(theTest);
-            
+
         }
-        
+
         [HttpPost]
         [Route("/Test/UpdateTest/{testId}")]
         public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
@@ -137,7 +148,7 @@ namespace TestCentral.Controllers
             {
                 return NotFound();
             }
-            
+
             if (ModelState.IsValid)
             {
                 test.Description = editTest.Description;
@@ -153,9 +164,9 @@ namespace TestCentral.Controllers
                     existingQuestion.ImgRelatedToPrompt = question.ImgRelatedToPrompt;
                     existingQuestion.Answer = question.Answer;
 
-                    if(question.Options != null)
+                    if (question.Options != null)
                     {
-                        foreach(Option option in question.Options)
+                        foreach (Option option in question.Options)
                         {
                             Option existingOption = context.Options.SingleOrDefault(o => o.Id == option.Id);
 
@@ -170,11 +181,11 @@ namespace TestCentral.Controllers
                 return Redirect("/Test/Details/" + test.Id);
             }
 
-            
-            
-            return View("/Index"); 
+
+
+            return View("/Index");
         }
-        
+
     }
-    
+
 }

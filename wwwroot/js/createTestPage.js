@@ -116,15 +116,34 @@ const deleteQuestion = (qId) => {
     document.getElementById(`qdiv-${qId}`).remove();
 }
 
-const saveNewTestRecord = (json) => {
-    fetch('http://localhost:5001/test/ProcessAddTestForm/', {
-        method: 'post',
-        body: json
-    }).then(function (response) {
-        return response.json();
-    }).then(function (data) {
-        return /* do something with data */
+const saveNewTestRecord = (data) => {
+    fetch("http://localhost:5001/test/ProcessAddTestForm", {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data),
+        redirect: 'follow'
+    }).then(response => {
+        if (response.redirected) {
+            window.location.href = response.url;
+        }
+    }).catch(error => {
+        console.error(error);
     });
+}
+
+const isValid = (value, minLength = null, maxLength = null) => {
+    let isValid = true;
+    if (value === "") {
+        isValid = false;
+    }
+    if (minLength || maxLength) {
+        if (value.length < minLength || value.length > maxLength) {
+            isValid = false;
+        }
+    }
+    return isValid;
 }
 
 const compileNewTestData = () => {
@@ -136,12 +155,7 @@ const compileNewTestData = () => {
     /// an object with the fields defined below: the id of the html element, and a message to be appended to said element
     /// { htmlId: "", errorMsg: "" }
 
-    if (testName === "") {
-        validationErrors.push({
-            htmlId: `testName`,
-            errorMsg: "Please provide a test name that is between 3 and 50 characters."
-        });
-    } else if (testName.length < 3 || testName.length > 50) {
+    if (!isValid(testName)) {
         validationErrors.push({
             htmlId: `testName`,
             errorMsg: "Please provide a test name that is between 3 and 50 characters."
@@ -167,11 +181,24 @@ const compileNewTestData = () => {
             });
         }
 
-
         const newQuestion = {
             "Prompt": document.getElementById(`prompt-${qId}`).value,
             "Type": type,
-            "ImgRelatedToPrompt": document.getElementById(`imageLink-${qId}`).value
+        }
+
+
+        const imgUrl = document.getElementById(`imageLink-${qId}`).value
+        const imgUrlValid = window.utilFunctions.validURL(imgUrl)
+
+        if (!imgUrlValid) {
+            validationErrors.push({
+                htmlId: `imageLink-${qId}`,
+                errorMsg: "Please provide a valid Url"
+            });
+        }
+
+        if (imgUrl !== "" && imgUrlValid) {
+            newQuestion["ImgRelatedToPrompt"] = imgUrl;
         }
 
         let answer;
