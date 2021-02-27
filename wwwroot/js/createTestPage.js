@@ -3,16 +3,10 @@ const qSectionId = "questionsSection";
 const addQuestionBtnId = "createTestFormAddQuestion";
 const submitTestBtnId = "submit";
 
-const updateDisplayNum = (qId) => {
-    // <!> Unfinished function <!>
-    const displayNum = window.window.createTestPage.testQuestions.indexOf(qId);
-    // Do some action to set relevant DOM element with that new number
-}
 
-//Adds additional question to test after upon Add Question button click:
 
 const buildH3Str = text => {
-    return `<h3>${text}</h3>`
+    return `<h3 class="questionNums">${text}</h3>`
 }
 const buildSelectOptionStr = (value, text) => {
     return `<option value="${value}">${text}</option>`
@@ -113,7 +107,25 @@ const deleteQuestion = (qId) => {
     const questions = window.createTestPage.testQuestions.filter(id => id !== qId);
     window.createTestPage.testQuestions = questions;
     document.getElementById(`qdiv-${qId}`).remove();
+    updateDisplayNum();
 }
+
+function updateDisplayNum() {
+    const questionNums = document.getElementsByClassName("questionNums");
+    for (let i = 0; i < questionNums.length; i++) {
+        questionNums[i].innerHTML = i + 1;
+    }
+}
+
+/*
+const updateDisplayNum = (qId) => {
+    // <!> Unfinished function <!>
+    const displayNum = window.window.createTestPage.testQuestions.indexOf(qId);
+   
+    // Do some action to set relevant DOM element with that new number
+}
+*/
+
 
 const saveNewTestRecord = (data) => {
     fetch("http://localhost:5001/test/ProcessAddTestForm", {
