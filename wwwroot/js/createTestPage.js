@@ -189,7 +189,7 @@ const compileNewTestData = () => {
         const imgUrl = document.getElementById(`imageLink-${qId}`).value
         const imgUrlValid = window.utilFunctions.validURL(imgUrl)
 
-        if (!imgUrlValid) {
+        if (!imgUrlValid && imgUrl != "") { //only requires it if the ImgUrl isn't blank
             validationErrors.push({
                 htmlId: `imageLink-${qId}`,
                 errorMsg: "Please provide a valid Url"
