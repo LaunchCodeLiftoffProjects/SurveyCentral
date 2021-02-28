@@ -157,7 +157,7 @@ const compileNewTestData = () => {
     /// an object with the fields defined below: the id of the html element, and a message to be appended to said element
     /// { htmlId: "", errorMsg: "" }
 
-    if (!isValid(testName)) {
+    if (!isValid(testName, 3, 50)) {
         validationErrors.push({
             htmlId: `testName`,
             errorMsg: "  Please provide a test name that is between 3 and 50 characters."

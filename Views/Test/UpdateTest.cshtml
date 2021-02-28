@@ -21,12 +21,12 @@
                 <input type="hidden" asp-for="@Model.Id" />
                 <div class="form-group">
                     <label asp-for="NameOfTest" class="control-label">Name of Test</label>
-                    <input asp-for="NameOfTest" class="form-control" />
+                    <input asp-for="NameOfTest" class="form-control" required minlength="3" maxlength="50"/>
                     <span asp-validation-for="NameOfTest" class="text-danger"></span>
                 </div>
                 <div class="form-group">
                     <label asp-for="Description" class="control-label"></label>
-                    <input asp-for="Description" class="form-control" />
+                    <input asp-for="Description" class="form-control" required minlength="3" maxlength="50"/>
                     <span asp-validation-for="Description" class="text-danger"></span>
                 </div>
                 @for (int i = 0; i < Model.Questions.Count(); i++)
@@ -39,7 +39,7 @@
                         <input asp-for="@Model.Questions[i].Prompt" class="form-control" />
                         <span asp-validation-for="@Model.Questions[i].Prompt" class="text-danger"></span>
                         <label asp-for="@Model.Questions[i].Answer" class="control-label"></label>
-                        <input asp-for="@Model.Questions[i].Answer" class="form-control" />
+                        <input asp-for="@Model.Questions[i].Answer" class="form-control" required/>
                         <span asp-validation-for="@Model.Questions[i].Answer" class="text-danger"></span>
                         @if (@Model.Questions[i].ImgRelatedToPrompt != null) 
                         {
@@ -47,7 +47,7 @@
                             <img src="@Model.Questions[i].ImgRelatedToPrompt" class="imgRelatedToPrompts">
                         }
                         <label asp-for="@Model.Questions[i].ImgRelatedToPrompt" class="control-label">Question Image Link</label>
-                        <input asp-for="@Model.Questions[i].ImgRelatedToPrompt" class="form-control" />
+                        <input type="url"asp-for="@Model.Questions[i].ImgRelatedToPrompt" class="form-control" />
                         <span asp-validation-for="@Model.Questions[i].ImgRelatedToPrompt" class="text-danger"></span>
 
                         @{Question currentQuestion = Model.Questions[i]; }
