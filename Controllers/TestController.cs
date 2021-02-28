@@ -108,12 +108,12 @@ namespace TestCentral.Controllers
                 loopRunTimes++;
             }
 
-            return View("Details", t); //hasn't been fully built yet, currently built on index, could be test instead
+            return View("Details", t);
         }
 
 
         [HttpGet]
-        public IActionResult Delete(int testId) // this could be an array to delete multiple tests
+        public IActionResult Delete(int testId)
         {
             Test theTest = context.Tests.Find(testId);
             context.Tests.Remove(theTest);
@@ -137,7 +137,7 @@ namespace TestCentral.Controllers
 
         [HttpPost]
         [Route("/Test/UpdateTest/{testId}")]
-        public IActionResult UpdateTest(EditTestViewModel editTest, int testId) //Trying to figure out how to get it to allow update and loading all the info
+        public IActionResult UpdateTest(EditTestViewModel editTest, int testId)
         {
             Test test = context.Tests
                 .Include(t => t.Questions)
@@ -160,7 +160,6 @@ namespace TestCentral.Controllers
                     Question existingQuestion = context.Questions.SingleOrDefault(q => q.Id == question.Id);
 
                     existingQuestion.Prompt = question.Prompt;
-                    existingQuestion.Type = question.Type;
                     existingQuestion.ImgRelatedToPrompt = question.ImgRelatedToPrompt;
                     existingQuestion.Answer = question.Answer;
 
@@ -169,8 +168,6 @@ namespace TestCentral.Controllers
                         foreach (Option option in question.Options)
                         {
                             Option existingOption = context.Options.SingleOrDefault(o => o.Id == option.Id);
-
-                            existingOption.Value = option.Value;
                             existingOption.Label = option.Label;
                         }
                     }

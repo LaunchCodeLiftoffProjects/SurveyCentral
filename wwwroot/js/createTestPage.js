@@ -167,7 +167,7 @@ const compileNewTestData = () => {
     if (!isValid(description, 5, 50)) {
         validationErrors.push({
             htmlId: `testDescription`,
-            errorMsg: "  Please provide a description that is between 3 and 50 characters."
+            errorMsg: "  Please provide a description that is between 5 and 50 characters."
         });
     }
 
