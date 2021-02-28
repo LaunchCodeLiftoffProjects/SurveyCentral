@@ -3,23 +3,23 @@
 @{
     ViewData["Title"] = "Index";
 }
-
+<script src="~/js/SortTable.js"></script>
 <h1>Index</h1>
 
 <body>
-    <table class="table">
+    <table id="myTable" class="table table-hover">
         <thead>
             <tr>
-                <th>
+                <th onclick="sortTable(0)">
                     Test Name
                 </th>
-                <th>
+                <th onclick="sortTable(1)">
                     Description
                 </th>
-                <th>
+                <th onclick="sortTable(2)">
                     Created Date
                 </th>
-                <th>
+                <th onclick="sortTable(3)">
                     Last Updated
                 </th>
                 <th>
@@ -53,3 +53,4 @@
         </tbody>
     </table>
 </body>
+
