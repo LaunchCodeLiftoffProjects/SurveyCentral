@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 @using Microsoft.AspNetCore.Identity
 
 @inject SignInManager<TestUser> SignInManager
@@ -62,10 +62,10 @@
 
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow">
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light border-bottom box-shadow">
             <div class="container">
                 @* Add Final App Name Below*@
-                <a class="navbar-brand" asp-area="" asp-controller="Test" asp-action="Index">TestCentral</a>
+                <a class="navbar-brand" style="color:white; font-size: xx-large" asp-area="" asp-controller="Test" asp-action="Index">TestCentral</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -86,11 +86,11 @@
                             //    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
                             //</li>
                             <li class="nav-item">
-                                <a id="manage" class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fas fa-user"></i></a>
+                                <a id="manage" class="nav-link text-white" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage"><i class="fas fa-user"></i></a>
                             </li>
                             <li class="nav-item">
                                 <form id="logoutForm" class="form-inline" asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-                                    <button id="logout" type="submit" class="nav-link btn btn-link text-dark"><i class="fas fa-sign-out-alt"></i></button>
+                                    <button id="logout" type="submit" class="nav-link btn btn-link text-white"><i class="fas fa-sign-out-alt"></i></button>
                                 </form>
                             </li>
                         }

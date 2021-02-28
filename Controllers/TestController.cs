@@ -87,7 +87,7 @@ namespace TestCentral.Controllers
 
         [HttpGet]
         [Route("/Test/Details/{testId?}")]
-        public IActionResult Details(int testId) //Not sure of the view yet, but wanted to get this in place
+        public IActionResult Details(int testId)
         {
 
             Test t = context.Tests

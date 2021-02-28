@@ -5,6 +5,7 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color: white;
 }
 
 /* Provide sufficient contrast against white background */
@@ -93,6 +94,10 @@ body {
     padding: 30px;
     border-radius: 50%;
     margin-left: 20px;
+}
+
+header{
+    background-color: darkgreen;
 }
 
 /* imported button that doesn't serve purpose. */
