@@ -6,24 +6,24 @@
 <script src="~/js/SortTable.js"></script>
 <h1>Index</h1>
 
-<body>
-    <table id="myTable" class="table table-hover">
+<body class="tableData" style="padding: 0px; margin: 0px; width: 100%;">
+    <table id="sortableTable" class="table table-hover">
         <thead>
             <tr>
-                <th onclick="sortTable(0)">
-                    Test Name
-                </th>
-                <th onclick="sortTable(1)">
-                    Description
-                </th>
-                <th onclick="sortTable(2)">
-                    Created Date
-                </th>
-                <th onclick="sortTable(3)">
-                    Last Updated
+                <th>
+                    Test Name <i class="fas fa-sort" onclick="sortTable(0)"></i>
                 </th>
                 <th>
-                    <a asp-action="Add" asp-controller="Test" style="color: forestgreen"><i class="fas fa-plus" style="color: forestgreen"></i> Create</a>
+                    Description <i class="fas fa-sort" onclick="sortTable(1)"></i>
+                </th>
+                <th>
+                    Created<i class="fas fa-sort" onclick="sortTable(2)"></i>
+                </th>
+                <th>
+                    Updated <i class="fas fa-sort" onclick="sortTable(3)"></i>
+                </th>
+                <th>
+                    <a asp-action="Add" asp-controller="Test" style="color: forestgreen">Create<i class="fas fa-plus" style="color: forestgreen"></i></a>
                 </th>
             </tr>
         </thead>
