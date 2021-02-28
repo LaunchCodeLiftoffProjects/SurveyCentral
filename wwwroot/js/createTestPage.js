@@ -101,9 +101,6 @@ const populate = (qId) => {
 //***delete unwanted previously added question:
 
 const deleteQuestion = (qId) => {
-    // <!> Will need to remove event listeners from DOM elements before removing <!>
-    //$(`type-${qId}`).off();
-    //$(`btnRemove-${qId}`).off();
     const questions = window.createTestPage.testQuestions.filter(id => id !== qId);
     window.createTestPage.testQuestions = questions;
     document.getElementById(`qdiv-${qId}`).remove();
@@ -116,15 +113,6 @@ function updateDisplayNum() {
         questionNums[i].innerHTML = i + 1;
     }
 }
-
-/*
-const updateDisplayNum = (qId) => {
-    // <!> Unfinished function <!>
-    const displayNum = window.window.createTestPage.testQuestions.indexOf(qId);
-   
-    // Do some action to set relevant DOM element with that new number
-}
-*/
 
 
 const saveNewTestRecord = (data) => {
@@ -190,7 +178,6 @@ const compileNewTestData = () => {
         });
     }
 
-
     const newTest = {
         "NameOfTest": testName,
         "Description": description,
@@ -199,6 +186,7 @@ const compileNewTestData = () => {
 
     //loop through all questions of form
     //const questions = window.createTestPage.testQuestions; //moved up to use it for validation
+
 
     for (let qId of questions) {
         const type = document.getElementById(`type-${qId}`).value;
@@ -209,6 +197,18 @@ const compileNewTestData = () => {
                 errorMsg: "Please select a type for this question"
             });
         }
+
+        if (type === "Free Text") {
+            let qAnswer = document.getElementById(`input${qId}`).value;
+
+            if (!isValid(qAnswer, 1, 50)) {
+                validationErrors.push({
+                    htmlId: `qAnswer-${qId}`,
+                    errorMsg: "Please provide an answer for this question that is between 1-50 characters"
+                })
+            }
+        }
+        
 
         const newQuestion = {
             "Prompt": document.getElementById(`prompt-${qId}`).value,
@@ -232,12 +232,6 @@ const compileNewTestData = () => {
 
         let answer;
         let options = null;
-
-        // free text, just grab value from input
-        // if true false, just grab value of select, and then set answer to "True" for true, or "False" for false
-        // if multiple-choice, will need to define and grab the options, which will be objects with label and value,
-        /// and then the answer is still set on the overall question object with the property "Answer", and the value will be the 
-        /// letter value of the correct option (A,B,C,D,E)
 
         if (type === "True/False") {
             answer = document.getElementById(`trueFalse${qId}`).value;
@@ -288,7 +282,7 @@ const insertAfter = (referenceNode, newNode) => {
 }
 
 const submitTest = (ev) => {
-    // function call to clear off any existing span elements appended to inputs from previous invalid submitTest calls
+    //clear off any existing span elements appended to inputs from previous invalid submitTest calls
     var spans = document.getElementsByTagName('span');
     for (let span of spans) {
         span.innerHTML = "";
@@ -302,7 +296,6 @@ const submitTest = (ev) => {
     if (validationErrors) {
         for (let e of validationErrors) {
             console.log(validationErrors);
-            // some code to get an html node using e["htmlId"] and then set a span next to it resembling `<span>${e["errorMsg"]}</span>`
             var inputNode = document.getElementById(e["htmlId"]);
             var spanTag = document.createElement("span");
             spanTag.style = "color: red";
@@ -313,47 +306,6 @@ const submitTest = (ev) => {
         saveNewTestRecord(newTestJson);
     }
 }
-
-//*******HTML form input => JS object
-//{
-//    "NameOfTest": "Mini Quiz",
-//        "Description": "A short quiz to test DB connection.",
-//            "Questions": [{
-//"Prompt": "Is the Earth is the 3rd planet from the sun?",
-//    "Answer": "True",
-//        "Type": "True/False"
-//            },
-//{
-//    "Prompt": "What does API stand for?",
-//        "Answer": "Application Programming Interface",
-//            "Type": "Free Text"
-//},
-//{
-//    "Prompt": "Which of the following states is the largest?",
-//        "Type": "Multiple Choice",
-//            "Options": [{
-//                "Value": "A",
-//                "Label": "Kansas"
-//            },
-//            {
-//                "Value": "B",
-//                "Label": "Texas"
-//            },
-//            {
-//                "Value": "C",
-//                "Label": "California"
-//            },
-//            {
-//                "Value": "D",
-//                "Label": "Alaska"
-//            }],
-//                "Answer": "D"
-//            }]
-//}
-
-
-
-//Processes Add Question and Save Test; prevents form from sending upon click:
 
 const createTestPageLoad = () => {
     window.onload = (ev) => {
