@@ -105,6 +105,17 @@ header{
     visibility: hidden;
 }
 
-i.fas{
+i.fas {
     padding-left: 10px;
+    cursor: pointer;
+}
+
+.testHeader {
+    font-size: medium;
+    white-space: nowrap;
+    padding-left: 25px;
+}
+
+.testOptions {
+    white-space: nowrap;
 }
