@@ -24,6 +24,10 @@ a {
   border-color: #1861ac;
 }
 
+h1,h2 {
+    padding-top: 20px;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -118,4 +122,9 @@ i.fas {
 
 .testOptions {
     white-space: nowrap;
+}
+
+.nav-ItemRegister{
+    color: white;
+    padding: 10px;
 }
