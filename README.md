@@ -5,7 +5,7 @@ Angela Dudley, Christian Frauenhoffer, Grace Brown, Nathan Gearke, and Sam Pomar
 It is designed as a virtual tool for teachers during times of heavy virtual instruction and exists to enhance test making/giving.
 
 Survey Central allows teachers to:
-1. Create an account and select and emoji avatar.
+1. Create an account and select an emoji avatar.
 2. Create tests with a variety of options.
 3. Link images to questions.
 4. View created tests.
