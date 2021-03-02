@@ -4,7 +4,14 @@
     ViewData["Title"] = "Index";
 }
 <script src="~/js/SortTable.js"></script>
+<script src="~/js/searchTable.js"></script>
+
 <h1>Index</h1>
+<br />
+
+<input type="text" class="input-group-text" id="myInput" onkeyup="searchTable()" placeholder="Search for Test Name..." style="width: 100%; border: 2px solid;">
+
+<br />
 
 <body class="tableData">
     <table id="sortableTable" class="table table-hover">
