@@ -1,12 +1,13 @@
 ﻿function searchTable() {
     // Declare variables
-    var input;
-    var filter;
-    var table;
-    var tr;
-    var td;
-    var i;
-    var txtValue;
+    let input;
+    let filter;
+    let table;
+    let tr;
+    let td;
+    let i;
+    let txtValue;
+
     input = document.getElementById("myInput");
     filter = input.value.toUpperCase();
     table = document.getElementById("sortableTable");
