@@ -51,6 +51,7 @@
     <script src="~/js/createTestPage.js"></script>
     <script src="~/js/site.js"></script>
     <script src="~/js/util.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css"
@@ -58,6 +59,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" data-rocket-async="style" as="style" onload="this.onload=null;this.rel='stylesheet'" />
 </head>
 
 <body>
@@ -71,17 +73,16 @@
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
                     <ul class="navbar-nav flex-grow-1">
                         @if (SignInManager.IsSignedIn(User))
                         {
 
                             @*<li class="nav-item">
-                                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Home</a>
-                                </li>*@
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Home</a>
+                            </li>*@
                             //<li> class="nav-item">
-                            //<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                                //<a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                             //</li>
                             //<li class="nav-item">  //Move this to the left bar?
                             //    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
@@ -95,36 +96,23 @@
                                 </form>
                             </li>
                         }
-                        else
-                        {
-                            <li class="nav-item">
-                                <a class="nav-ItemRegister" id="register" asp-area="Identity" asp-page="/Account/Register">Register</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-ItemRegister" id="login" asp-area="Identity" asp-page="/Account/Login">Login</a>
-                            </li>
-                        }
-
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-
     @if (SignInManager.IsSignedIn(User))
     {
-        <!-- Left side navbar removed for now.-->
-        <!--
-            <div class="row">
-                <div class="sidebar">
-                        <h5>Menu</h5>
-                        <br />
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Tests</a>
-                        <br />
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
-
-                </div>
-        </div>-->
+        <div class="row">
+            <div class="sidebar">
+                    <h5>Menu</h5>
+                    <br />
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Tests</a>
+                    <br />    
+                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
+                     
+            </div>
+        </div>
         <div class="container">
             <main role="main" class="col-9" style="text-align: justify;">
                 @RenderBody()
@@ -140,12 +128,12 @@
             </main>
         </div>
     }
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2021 - TestCentral <!-- - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>-->
-        </div>
-    </footer>
-    @RenderSection("Scripts", required: false)
+    
+        <footer class="border-top footer text-muted">
+            <div class="container">
+                &copy; 2021 - TestCentral <!-- - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>-->
+            </div>
+        </footer>
+        @RenderSection("Scripts", required: false)
 </body>
 </html>
