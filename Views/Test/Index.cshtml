@@ -3,29 +3,36 @@
 @{
     ViewData["Title"] = "Index";
 }
+<script src="~/js/SortTable.js"></script>
+<script src="~/js/searchTable.js"></script>
 
 <h1>Index</h1>
+<br />
 
-<p>
-    <a asp-action="Add" asp-controller="Test">Create New Test</a>
-</p>
-<body>
-    <table class="table">
+<input type="text" class="input-group-text" id="myInput" onkeyup="searchTable()" placeholder="Search for Test Name..." style="width: 100%; border: 2px solid; text-align: left;">
+
+<br />
+
+<body class="tableData">
+    <table id="sortableTable" class="table table-hover">
         <thead>
-            <tr>
+            <tr class="testHeader">
                 <th>
-                    Test Name
+                    Test Name <i class="fas fa-sort" onclick="sortTable(0)"></i>
                 </th>
                 <th>
-                    Description
+                    Description <i class="fas fa-sort" onclick="sortTable(1)"></i>
                 </th>
                 <th>
-                    Created Date
+                    Created<i class="fas fa-sort" onclick="sortTable(2)"></i>
                 </th>
                 <th>
-                    Last Updated
+                    Updated <i class="fas fa-sort" onclick="sortTable(3)"></i>
                 </th>
-                <th></th>
+                <th>
+                    <a asp-action="Add" asp-controller="Test" style="color: darkgreen">Create<i class="fas fa-plus" style="        color: darkgreen;
+        cursor: pointer;"></i></a>
+                </th>
             </tr>
         </thead>
         <tbody>
@@ -44,13 +51,14 @@
                     <td>
                         @item.UpdatedAt.ToShortDateString()
                     </td>
-                    <td>
+                    <td class="testOptions">
                         <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@item.Id">Edit</a> |
                         <a asp-action="Details" asp-controller="Test" asp-route-testId="@item.Id">Details</a> |
-                        <a asp-action="Delete" asp-controller="Test" asp-route-TestId="@item.Id">Delete</a>
+                        <a asp-action="Delete" asp-controller="Test" asp-route-TestId="@item.Id"><i class="fas fa-trash-alt" style="color: red;"></i></a>
                     </td>
                 </tr>
             }
         </tbody>
     </table>
 </body>
+

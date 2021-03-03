@@ -5,6 +5,7 @@ a.navbar-brand {
   white-space: normal;
   text-align: center;
   word-break: break-all;
+  color: white;
 }
 
 /* Provide sufficient contrast against white background */
@@ -21,6 +22,10 @@ a {
   color: #fff;
   background-color: #1b6ec2;
   border-color: #1861ac;
+}
+
+h1,h2 {
+    padding-top: 20px;
 }
 
 /* Sticky footer styles
@@ -76,8 +81,15 @@ body {
 }
 
 .answers {
-    font: italic small-caps bold;
-    background-color:lightyellow;
+    font-weight: bold;
+    font-style: italic;
+    color: white;
+    background-color: cornflowerblue;
+    font-size: 20px;
+}
+
+.questionsPromt{
+
 }
 
 .imgRelatedToPrompts {
@@ -116,3 +128,31 @@ div.login-form-icon {
     text-align: center;
 }
 
+header{
+    background-color: darkgreen;
+}
+
+/* imported button that doesn't serve purpose. */
+#email-verification{
+    visibility: hidden;
+}
+
+i.fas {
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.testHeader {
+    font-size: medium;
+    white-space: nowrap;
+    padding-left: 25px;
+}
+
+.testOptions {
+    white-space: nowrap;
+}
+
+.nav-ItemRegister{
+    color: white;
+    padding: 10px;
+}

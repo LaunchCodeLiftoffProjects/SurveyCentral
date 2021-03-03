@@ -15,6 +15,8 @@ namespace TestCentral.Areas.Identity
     {
         public void Configure(IWebHostBuilder builder)
         {
+            //This code links it to the MySQL Database
+
             builder.ConfigureServices((context, services) => {
                 services.AddDbContext<TestDBContext>(options =>
                     options.UseMySql(
