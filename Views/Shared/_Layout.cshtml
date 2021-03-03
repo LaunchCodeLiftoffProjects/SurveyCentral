@@ -103,16 +103,6 @@
     </header>
     @if (SignInManager.IsSignedIn(User))
     {
-        <div class="row">
-            <div class="sidebar">
-                    <h5>Menu</h5>
-                    <br />
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Index">Tests</a>
-                    <br />    
-                    <a class="nav-link text-dark" asp-area="" asp-controller="Test" asp-action="Add">Create Test</a>
-                     
-            </div>
-        </div>
         <div class="container">
             <main role="main" class="col-9" style="text-align: justify;">
                 @RenderBody()
