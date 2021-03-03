@@ -309,14 +309,22 @@ const submitTest = (ev) => {
 
 const createTestPageLoad = () => {
     window.onload = (ev) => {
-        document.getElementById(addQuestionBtnId).addEventListener("click", (ev) => {
-            ev.preventDefault();
-            addNewQuestion();
-        });
-        document.getElementById(submitTestBtnId).addEventListener("click", (ev) => {
-            ev.preventDefault();
-            submitTest();
-        });
+        const addQuestionButton = document.getElementById(addQuestionBtnId);
+        const submitTestButton = document.getElementById(submitTestBtnId);
+
+        if (addQuestionButton !== null) {
+            addQuestionButton.addEventListener("click", (ev) => {
+                ev.preventDefault();
+                addNewQuestion();
+            });
+        }
+        if (submitTestButton !== null) {
+            submitTestButton.addEventListener("click", (ev) => {
+                ev.preventDefault();
+                submitTest();
+            });
+        }
+        
     };
 }
 
