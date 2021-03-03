@@ -22,9 +22,13 @@ namespace TestCentral.Areas.Identity
                     options.UseMySql(
                         context.Configuration.GetConnectionString("DefaultConnection")));
 
-                //Change options below to change password input parameters (alphanumeric, minimum length, etc.)
+                //Customize registration and password requirements here:
 
-                services.AddDefaultIdentity<TestUser>(options => options.SignIn.RequireConfirmedAccount = false)
+                services.AddDefaultIdentity<TestUser>(options =>
+                {
+                    options.SignIn.RequireConfirmedAccount = false;
+                    options.SignIn.RequireConfirmedEmail = false;
+                    })
                     .AddEntityFrameworkStores<TestDBContext>();
             });
         }
