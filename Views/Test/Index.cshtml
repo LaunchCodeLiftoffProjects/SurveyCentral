@@ -46,10 +46,10 @@
                         @item.Description
                     </td>
                     <td>
-                        @item.CreatedAt.ToShortDateString()
+                        @Convert.ToDateTime(item.CreatedAt).ToString("MM-dd-yyyy")
                     </td>
                     <td>
-                        @item.UpdatedAt.ToShortDateString()
+                        @Convert.ToDateTime(item.UpdatedAt).ToString("MM-dd-yyyy")
                     </td>
                     <td class="testOptions">
                         <a asp-action="UpdateTest" asp-controller="Test" asp-route-testId="@item.Id">Edit</a> |

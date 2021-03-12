@@ -42,8 +42,8 @@ namespace TestCentral.Controllers
                     NameOfTest = addTestViewModel.NameOfTest,
                     Description = addTestViewModel.Description,
                     UpdatedAt = DateTime.Now,
-                    CreatedAt = DateTime.Now
-                };
+                    CreatedAt = DateTime.Now,
+            };
 
                 context.Tests.Add(newTest);
                 context.SaveChanges();
