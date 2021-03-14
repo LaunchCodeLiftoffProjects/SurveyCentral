@@ -1,17 +1,11 @@
 ﻿function searchTable() {
-    // Declare variables
-    let input;
-    let filter;
-    let table;
-    let tr;
+    let input = document.getElementById("myInput");
+    let filter = input.value.toUpperCase();
+    let table = document.getElementById("sortableTable");
+    let tr = table.getElementsByTagName("tr");
     let td;
     let i;
     let txtValue;
-
-    input = document.getElementById("myInput");
-    filter = input.value.toUpperCase();
-    table = document.getElementById("sortableTable");
-    tr = table.getElementsByTagName("tr");
 
     // Loop through all table rows, and hide those who don't match the search query
     for (i = 0; i < tr.length; i++) {

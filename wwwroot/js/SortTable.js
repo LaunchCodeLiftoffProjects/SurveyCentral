@@ -1,9 +1,15 @@
 ﻿function sortTable(n) {
-    var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;
-    table = document.getElementById("sortableTable");
-    switching = true;
+    let rows;
+    let i;
+    let x;
+    let y;
+    let shouldSwitch;
+    let switchCount = 0;
+
+    let table = document.getElementById("sortableTable");
+    let switching = true;
     //Set the sorting direction to ascending:
-    dir = "ASC";
+    let dir = "ASC";
     /*Make a loop that will continue until
     no switching has been done:*/
     while (switching) {
@@ -41,11 +47,11 @@
             rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
             switching = true;
             //Each time a switch is done, increase this count by 1:
-            switchcount++;
+            switchCount++;
         } else {
             /*If no switching has been done AND the direction is "asc",
             set the direction to "desc" and run the while loop again.*/
-            if (switchcount == 0 && dir == "ASC") {
+            if (switchCount == 0 && dir == "ASC") {
                 dir = "DESC";
                 switching = true;
             }
