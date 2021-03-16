@@ -116,7 +116,7 @@ function updateDisplayNum() {
 
 
 const saveNewTestRecord = (data) => {
-    fetch("http://localhost:5001/test/ProcessAddTestForm", {
+    fetch("http://localhost:5000/test/ProcessAddTestForm", {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'
