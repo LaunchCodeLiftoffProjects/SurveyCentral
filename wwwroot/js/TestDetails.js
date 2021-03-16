@@ -33,7 +33,7 @@ function printableKey() {
 //Delete a question while editing a test. NOTE - you'll have to update the local host for your computer
 function postDeleteQuestion(questionId) {
     if (window.confirm("Are you sure you want to delete this question?")) {
-        fetch('http://localhost:63752/Question/DeleteQuestion/' + questionId,
+        fetch('http://localhost:5000/Question/DeleteQuestion/' + questionId,
             {
                 method: 'POST'
             }).then(response => {
@@ -43,7 +43,7 @@ function postDeleteQuestion(questionId) {
                 location.reload();
             })
             .catch(error => {
-                console.error('There has been an issue');
+                console.error('There has been an issue. You might want to check your local port.');
             });
     }
     return;

@@ -74,15 +74,15 @@ const populate = (qId) => {
     } else if (type === "Multiple Choice") {
         qAnswerElement.innerHTML = `<p>Choices:</p>
             <label for="a${qId}">A</label>
-            <input type="text" id="a${qId}" name="a${qId}">
+            <input type="text" id="a${qId}" name="a${qId}"> <br>
             <label for="b${qId}">B</label>
-            <input type="text" id="b${qId}" name="b${qId}">
+            <input type="text" id="b${qId}" name="b${qId}"> <br>
             <label for="c${qId}">C</label>
-            <input type="text" id="c${qId}" name="c${qId}">
+            <input type="text" id="c${qId}" name="c${qId}"> <br> 
             <label for="d${qId}">D</label>
-            <input type="text" id="d${qId}" name="d${qId}">
+            <input type="text" id="d${qId}" name="d${qId}"> <br>
             <label for="e${qId}">E</label>
-            <input type="text" id="e${qId}" name="e${qId}"><br>
+            <input type="text" id="e${qId}" name="e${qId}"><br><br>
             <label for="mulChoiceCorrect${qId}">Correct Answer:</label>
             <select name="mulChoiceCorrect${qId}" id="mulChoiceCorrect${qId}">
               <option disabled>Select One</option>
